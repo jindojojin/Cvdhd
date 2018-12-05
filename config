@@ -13,3 +13,13 @@ muffin baby bamboo giant service panda bargain swift galaxy coral social lion
 
 
 https://coursetro.com/posts/code/103/Solidity-Inheritance-and-Deploying-an-Ethereum-Smart-Contract
+
+
+
+
+// Phần phía trên liên quan đến kết nối với Solidity nên nếu anh Hùng vs anh Quang làm giao diện 
+thôi thì chỉ cần làm các bước phía dưới này
+// sau khi clone từ repo của Linh về:
+1. nếu chưa cài nodejs thì cài nodejs :)
+2. npm install
+3. npm run dev

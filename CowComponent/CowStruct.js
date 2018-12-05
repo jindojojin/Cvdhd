@@ -1,5 +1,4 @@
 // require("../node_modules/web3/dist/web3.min.js");
-
 var CowStruct = {
     findID: function (id) {
         Coursetro.findID(id, (err, res) => {
