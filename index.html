@@ -1,116 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
+<!--
+The post that goes with this pen:
+https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js 
+-->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-
-	<link rel="stylesheet" type="text/css" href="main.css">
-
-	<script src="./node_modules/web3/dist/web3.min.js"></script>
-	<script src="./CowComponent/CowStruct.js"></script>
-	<script src="./config_connection.js"></script>
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	 crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	 crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- <link href="main.css" rel="stylesheet"> -->
+	<script src="index.js"></script>
 </head>
 
 <body>
-	<div class="container">
 
-		<h1>Coursetro Instructor</h1>
-		<span id="countIns"></span>
+	<nav class="navbar navbar-expand-lg bg-dark">
+			<a style="color:white" class="ml-4 navbar-brand" routerLink>Hệ thống quản lý dữ liệu truy xuất nguồn gốc thịt bò </a>
+			<div class="collapse navbar-collapse"></div>
+			<div class="btn btn-group float-right">
+			  <button class="btn btn-success my-2 my-sm-0" routerLink="register">Register +</button>
+			  <button class="btn btn-success my-2 my-sm-0" routerLink="login">Login</button>
+			</div>
+	</nav>
 
-		<h2 id="instructor"></h2>
-		<span id="insTrans"></span>
-		<hr>
-
-		<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
-
-		<label for="fName" class="col-lg-2 control-label">First Name</label>
-		<input id="fName" type="text">
-
-		<label for="lName" class="col-lg-2 control-label">Last Name</label>
-		<input id="lName" type="text">
-
-		<label for="fName" class="col-lg-2 control-label">First Name</label>
-		<input id="fName1" type="text">
-
-		<label for="lName" class="col-lg-2 control-label">Last Name</label>
-		<input id="lName1" type="text">
-
-
-		<label for="age" class="col-lg-2 control-label">Instructor Age</label>
-		<input id="age" type="number">
-
-		<button id="button">Update Instructor</button>
-
-		<label for="lName" class="col-lg-2 control-label">Find ID</label>
-		<input id="findid" type="number">
-
-		<button id="btfindid">Find ID</button>
-		<button id="btfindat">Find At</button>
-
-
-
-		<h2 id="instructor1"></h2>
-
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height:100vh">
+				<div class="sidebar-sticky">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<button class="btn btn-link nav-link active  text-success" onclick="changePage('image')" >
+								<i class="fas fa-images"></i>
+								<span data-feather="home"></span>
+								Dữ liệu ảnh<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-link nav-link text-success" onclick="changePage('addCow')" >
+								<i class="fas fa-archway"></i>
+								<span data-feather="bar-chart-2"></span>
+								Nhập bò
+							</button>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-link nav-link text-success" onclick="changePage('cowHealth')" >
+								<i class="fas fa-user-md"></i>
+								<span data-feather="file"></span>
+								Theo dõi sức khỏe
+							</a>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-link nav-link text-success" onclick="changePage('vaccine')" >
+								<i class="fas fa-syringe"></i>
+								<span data-feather="layers"></span>
+								Sử dụng thuốc thú y
+							</button>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-link nav-link text-success" onclick="changePage('food')" >
+								<i class="fas fa-apple-alt"></i>
+								<span data-feather="layers"></span>
+								Thức ăn
+							</button>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-link nav-link text-success" onclick="changePage('sellCow')" >
+								<i class="fas fa-truck-moving"></i>
+								<span data-feather="shopping-cart"></span>
+								Xuất bò
+							</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<div id="router" class="col-md-9 ml-sm-auto col-lg-10">
+					<iframe style="overflow:hidden; 
+					display:block; position: absolute; height: 100%; width: 100%" scrolling="no" frameborder="0" src="CowComponent/AddCow/addcow.html"></iframe>
+			</div>
+		</div>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-	<script>
-		// console.log(Coursetro);
-
-		var instructorEvent = Coursetro.instructorInfo({}, 'latest');
-
-		instructorEvent.watch(function (error, result) {
-			if (result) {
-				if (result.blockHash != $("#insTrans").html())
-					$("#loader").hide();
-
-				$("#insTrans").html('Block hash: ' + result.blockHash);
-				$("#instructor").html((result.args.fName) + ' ' + (result.args.lName) + ' ' + (result.args.fName1)
-					+ ' ' + (result.args.lName1) + ' ' + result.args.age);
-			} else {
-				$("#loader").hide();
-			}
-		});
-
-		/*  Coursetro.countInstructors((err, res) => {
-			  if (res)
-			   $("#countIns").html(res.c + ' Instructors');
-		  })*/
-
-
-
-
-		$("#button").click(function () {
-			$("#loader").show();
-			Coursetro.setInstructor(web3.eth.defaultAccount, $("#age").val(), $("#fName").val(), $("#lName").val(), $("#fName1").val(), $("#lName1").val(), (err, res) => {
-				if (err) {
-					$("#loader").hide();
-				}
-			});
-			
-		});
-
-		$("#btfindid").click(function () {
-			CowStruct.findID($("#findid").val());
-		});
-
-		$("#btfindat").click(function () {
-			Coursetro.getInfoAt($("#findid").val(), (err, res) => {
-				if (res)
-					console.log(res);
-				console.log(web3.toAscii(res[4]));
-			});
-			//    CowStruct();
-		});
-
-
-	</script>
-
 </body>
 
-</html>
+
+<!-- 3 phần chính : mô tả bài toá
+phân tích thiết kế
+triển khhai cài đặt và kết quả  45 trang , tập trung nhiều vào phần thiết kế và triển khai hệ thống thực
++_công nghệ lõi, cài đặt lên hệ thống như thế nào-->
+
+<!-- Các tính năng sẽ xây dựng, mô hình cơ sở dữ liệu, thiết kế hệ thống (lớp, layer, kết nối làm việc với nhau như thế nào) -->
