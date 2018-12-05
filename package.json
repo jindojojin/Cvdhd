@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"lite-server"
-    
+    "dev": "lite-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "web3": "github:ethereum/web3.js"
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10",
+    "web3": "^0.20.6"
   },
   "devDependencies": {
     "lite-server": "^2.4.0"

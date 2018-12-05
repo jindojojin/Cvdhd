@@ -1,141 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 
-    <script src="./node_modules/web3/dist/web3.min.js"></script>
+	<script src="./node_modules/web3/dist/web3.min.js"></script>
+	<script src="./CowComponent/CowStruct.js"></script>
+	<script src="./config_connection.js"></script>
 
 </head>
-<body>
-    <div class="container">
 
-        <h1>CowInfo Instructor</h1>
+<body>
+	<div class="container">
+
+		<h1>Coursetro Instructor</h1>
+		<span id="countIns"></span>
 
 		<h2 id="instructor"></h2>
+		<span id="insTrans"></span>
+		<hr>
+
 		<img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
 
-       
+		<label for="fName" class="col-lg-2 control-label">First Name</label>
+		<input id="fName" type="text">
 
-        <label for="name" class="col-lg-2 control-label">Cowid</label>
-		<input id="cowid" type="text">
+		<label for="lName" class="col-lg-2 control-label">Last Name</label>
+		<input id="lName" type="text">
 
-		<label for="name" class="col-lg-2 control-label">Bornin</label>
-		<input id="bornin" type="text">
+		<label for="fName" class="col-lg-2 control-label">First Name</label>
+		<input id="fName1" type="text">
 
-		<label for="name" class="col-lg-2 control-label">Sex</label>
-		<input id="sex" type="number">
-		
-
-        <button id="button">Update Instructor</button>
+		<label for="lName" class="col-lg-2 control-label">Last Name</label>
+		<input id="lName1" type="text">
 
 
-    </div>
+		<label for="age" class="col-lg-2 control-label">Instructor Age</label>
+		<input id="age" type="number">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<button id="button">Update Instructor</button>
 
-       <script>
+		<label for="lName" class="col-lg-2 control-label">Find ID</label>
+		<input id="findid" type="number">
 
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-        }
+		<button id="btfindid">Find ID</button>
+		<button id="btfindat">Find At</button>
 
-            web3.eth.defaultAccount = web3.eth.accounts[0];
-            var CowInfoContract = web3.eth.contract([
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_cow_ID",
-				"type": "string"
-			},
-			{
-				"name": "_BornIn",
-				"type": "string"
-			},
-			{
-				"name": "_Sex",
-				"type": "uint256"
+
+
+		<h2 id="instructor1"></h2>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+	<script>
+		// console.log(Coursetro);
+
+		var instructorEvent = Coursetro.instructorInfo({}, 'latest');
+
+		instructorEvent.watch(function (error, result) {
+			if (result) {
+				if (result.blockHash != $("#insTrans").html())
+					$("#loader").hide();
+
+				$("#insTrans").html('Block hash: ' + result.blockHash);
+				$("#instructor").html((result.args.fName) + ' ' + (result.args.lName) + ' ' + (result.args.fName1)
+					+ ' ' + (result.args.lName1) + ' ' + result.args.age);
+			} else {
+				$("#loader").hide();
 			}
-		],
-		"name": "AddNewContract",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getTransacCount",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "cowid",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "bornin",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "sex",
-				"type": "uint256"
-			}
-		],
-		"name": "Info",
-		"type": "event"
-	}
-]);
+		});
 
-    var CowInfo = CowInfoContract.at('0xffca3b48433a5d023f45c9bfbdec101e2a31cde4');
-        console.log(CowInfo);
-		
-		var instructorEvent = CowInfo.Info();
+		/*  Coursetro.countInstructors((err, res) => {
+			  if (res)
+			   $("#countIns").html(res.c + ' Instructors');
+		  })*/
 
-		instructorEvent.watch(function(error, result){
-            if (!error)
-                {
-                    $("#loader").hide();
-                   $("#instructor").html(result.args.cowid + ' ' + result.args.bornin + ' ' + result.args.sex );
-                } else {
-                    $("#loader").hide();
-                    console.log(error);
-                }
-        });
-        $("#button").click(function() {
-            CowInfo.AddNewContract($("#cowid").val(), $("#bornin").val(), $("#sex").val(),/*
-			$("#weight").val(), $("#farmid").val(),*/(err, res) => {
-    if (err) {
-        $("#loader").hide();
-        console.log('oh no');
-    }
-});
+
+
+
+		$("#button").click(function () {
 			$("#loader").show();
-        }); 
+			Coursetro.setInstructor(web3.eth.defaultAccount, $("#age").val(), $("#fName").val(), $("#lName").val(), $("#fName1").val(), $("#lName1").val(), (err, res) => {
+				if (err) {
+					$("#loader").hide();
+				}
+			});
+			
+		});
 
-    </script>
+		$("#btfindid").click(function () {
+			CowStruct.findID($("#findid").val());
+		});
+
+		$("#btfindat").click(function () {
+			Coursetro.getInfoAt($("#findid").val(), (err, res) => {
+				if (res)
+					console.log(res);
+				console.log(web3.toAscii(res[4]));
+			});
+			//    CowStruct();
+		});
+
+
+	</script>
 
 </body>
+
 </html>

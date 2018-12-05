@@ -2,6 +2,22 @@ var mongoClient = require('mongodb').MongoClient;
 const url='mongodb://server:NSzE8QWym39iQTL@ds041347.mlab.com:41347/cvdhd';
 var ObjectId = require('mongodb').ObjectID;
 var dbmodel= {
+    addVerify: async function(username,password,AccountsInfo){
+        let client = await mongoClient.connect(url,{useNewUrlParser : true});
+        let db = client.db('cvdhd');
+        try {
+            let breederInserted = await db.collection('s').insertOne(BreederInfo);
+            await db.collection('Accounts').insertOne({
+                "username":username,
+                "password":password,
+                "type":"verify"
+            })
+        } catch (error) {
+            return Promise.reject(error);
+        } finally {
+            client.close();
+        }
+    },
     addBreeder: async function(username,password,BreederInfo){
         let client = await mongoClient.connect(url,{useNewUrlParser : true});
         let db = client.db('cvdhd');
@@ -104,8 +120,8 @@ var dbmodel= {
 // dbmodel.addGroup("5bf52190fb6fc0561ffdc0e5",{"name":"Nhóm bò nhập về ngày 20/10/2020","cow":[]});
 // dbmodel.addCowToGroup("5bf52354e1b6fd16f44c7da1","5bf52f64f1abf42620b2c641","5bf52ab93a38bb393062f63e");
 // dbmodel.getAccount("admin1");
-dbmodel.addBreeder("breeder2","breeder2",{
-"name" : "Trần Quang Linh"})
+// dbmodel.addBreeder("breeder2","breeder2",{
+// "name" : "Trần Quang Linh"})
 // dbmodel.getBannedWebSites('5bf4abcae7179a56e213cd2d');
 // dbmodel.addUser("5bf3ec04e7179a56e21350f3","May02");
 
