@@ -10,7 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autocomplete-js": "^2.7.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
     "mongodb": "^3.1.10",
+    "mongoose": "^5.3.15",
+    "validator": "^10.9.0",
     "web3": "^0.20.6"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 <head>
+  <!-- bootstrap + jquery -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -10,46 +11,108 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- <link href="main.css" rel="stylesheet"> -->
+  <script src="../../node_modules/jquery/dist/jquery.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <script src="addcow.js"></script>
+  <!-- import module tự động hoàn thành form cho việc tìm kiếm trang trại nhập dữ liệu -->
+  <link href="../../node_modules/autocomplete-js/dist/autocomplete.min.css" rel="stylesheet">
+  <script src="../../node_modules/autocomplete-js/dist/autocomplete.min.js"></script>
 </head>
 
 <body>
-
   <br>
   <br>
-  <form>
-    <h3>Thông tin con bò mới</h3>
-    <div class="row container">
-      <div class="col">
-        <div class="form-group">
-          <label>Số hiệu</label>
-          <input class="form-control" type="text">
-        </div>
-        <div class="form-group">
-          <label>Cấp giống</label>
-          <input class="form-control" type="text">
-        </div>
-        <div class="form-group">
-          <label>Giới tính</label>
-          <input class="form-control" type="text">
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label>Nơi sinh</label>
-          <input class="form-control" type="text">
-        </div>
-        <div class="form-group">
-          <label>Ngày tháng năm sinh</label>
-          <input class="form-control" type="date">
-        </div>
-        <div class="form-group">
-          <label>Cấp giống</label>
-          <input class="form-control" type="text">
-        </div>
+  <form id="CowInfoForm" style="width:100%">
+    <div class="row">
+      <div class="col ">
+        <h3 class="text-success">Thông tin trang trại</h3>
+        <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
+          <div class="form-group">
+            <label>Mã trang trại</label>
+            <input id="_farmID" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label>Tên trang trại</label>
+            <input id="_farmName" class="form-control" type="text" disabled>
+          </div>
+          <div class="form-group">
+            <label>Địa chỉ</label>
+            <input id="_farmAddress" class="form-control" type="text" disabled>
+          </div>
+          <div class="form-group">
+            <label>Tên chủ trang trại</label>
+            <input id="_farmOwner" class="form-control" type="text" disabled>
+          </div>
         </div>
       </div>
     </div>
+    <div class="row mt-2">
+      <div class="col">
+        <h3 class="text-success">Thông tin bò nhập về/ mới sinh</h3>
+        <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
+          <div class="form-group">
+            <label>Số hiệu</label>
+            <input id="_id" class="form-control" type="text">
+            <input id="_id2" type="checkbox" onclick="show_id_input()"> Bò mới sinh / chưa có số hiệu
+            <script>
+              function show_id_input() {
+                if ($('#_id2').is(":checked")) { $('#_id').hide(); $('#_id').val() = ''; }
+                else { $('#_id').show(); }
+              }
+            </script>
+          </div>
+          <div class="form-group">
+            <label>Giống</label>
+            <input id="_gender" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label>Giới tính:</label>
+            <select id="_sex">
+              <option value="1">Đực</option>
+              <option value="0">Cái</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ngày tháng năm sinh</label>
+            <input id="_birthday" class="form-control" type="date">
+          </div>
+          <div class="form-group">
+            <label>Nơi sinh</label>
+            <input id="_birthplace" class="form-control" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="col mr-5">
+        <h3 class="text-success">Huyết thống</h3>
+        <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
+          <h5 class="text-success">Bò bố</h5>
+          <div class="form-group">
+            <label>Số hiệu</label>
+            <input id="_fatherID" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label>Giống</label>
+            <input id="_fatherGender" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="container mt-1" style="border:solid 1px; border-radius:4px; border-color: #218838">
+          <h5 class="text-success">Bò mẹ</h5>
+          <div class="form-group">
+            <label>Số hiệu</label>
+            <input id="_motherID" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label>Giống</label>
+            <input id="_motherGender" class="form-control" type="text">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
   </form>
+  <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Đẩy dữ liệu</button>
 </body>
