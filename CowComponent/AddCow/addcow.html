@@ -47,10 +47,10 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row mt-2">
+    <!-- </div>
+    <div class="row mt-2"> -->
       <div class="col">
-        <h3 class="text-success">Thông tin bò nhập về/ mới sinh</h3>
+        <h3 class="text-success">Thông tin bò</h3>
         <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
           <div class="form-group">
             <label>Số hiệu</label>
@@ -86,7 +86,7 @@
       </div>
 
       <div class="col mr-5">
-        <h3 class="text-success">Huyết thống</h3>
+        <h3 class="text-success">Thông tin huyết thống</h3>
         <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
           <h5 class="text-success">Bò bố</h5>
           <div class="form-group">
@@ -115,4 +115,27 @@
     </div>
   </form>
   <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Đẩy dữ liệu</button>
+
+  <!-- //modalChain -->
+  <button id="showModal" class="d-none" data-toggle="modal" data-target="#blockchainModal"></button>
+  <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Đẩy thông tin lên BlockChain</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>Các thông tin sau sẽ được hệ thống đẩy lên blockchain, Hãy kiểm tra kỹ thông tin trước khi thực hiện!</h4>
+          <p style=" word-wrap: break-word" id="dataBlockChain"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary">Đẩy lên BlockChain</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>

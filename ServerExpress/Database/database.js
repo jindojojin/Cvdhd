@@ -2,16 +2,17 @@ var mongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://server:NSzE8QWym39iQTL@ds041347.mlab.com:41347/cvdhd';
 var ObjectId = require('mongodb').ObjectID;
 var dbmodel = {
-    addVerify: async function (username, password, AccountsInfo) {
+    addVerify: async function (username,password,AccountsInfo) {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
         try {
-            let breederInserted = await db.collection('s').insertOne(BreederInfo);
+            let verify = await db.collection('Accounts').insertOne(AccountsInfo);
             await db.collection('Accounts').insertOne({
                 "username": username,
                 "password": password,
                 "type": "verify"
             })
+            return Promise.resolve(verify.insertedId);
         } catch (error) {
             return Promise.reject(error);
         } finally {
@@ -23,6 +24,7 @@ var dbmodel = {
         let db = client.db('cvdhd');
         try {
             let farm = await db.collection('Farm').insertOne(FarmInfo);
+            await db.collection('LastCowCode').insertOne({_farmCode:FarmInfo._farmCode,_lastInsertedCode:0});
             return Promise.resolve(farm.insertedId)
         } catch (error) {
             return Promise.reject(error);
@@ -44,20 +46,14 @@ var dbmodel = {
             client.close();
         }
     },
-
-    addCow: async function (BreederID, CowInfo) {
-        if (!ObjectId.isValid(BreederID)) return Promise.reject("invalid BreederID");
+    addCow: async function (CowInfo) {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
         try {
-            const cowInserted = await db.collection('Cows').insertOne(CowInfo);
-            let query = { _id: { $in: [BreederID, new ObjectId(BreederID)] } };
-            let Breeder = await db.collection('Breeders').findOne(query);
-            Breeder.defaultCowGroup.push(cowInserted.insertedId + "");
-            let newValue = { $set: { defaultCowGroup: Breeder.defaultCowGroup } };
-            await db.collection('Breeders').updateOne(query, newValue);
+            await db.collection('Cow').insertOne(CowInfo)
             return Promise.resolve("OK");
         } catch (error) {
+            console.log(error)
             return Promise.reject(error);
         } finally {
             client.close();
@@ -75,32 +71,33 @@ var dbmodel = {
             client.close();
         }
     },
-
-    addCowToGroup: async function (CowID, GroupID, oldGroupID) { // if oldGroupID == null => dont delete cow from oldGroup
-        if (!ObjectId.isValid(CowID)) return Promise.reject("invalid BreederID");
+    getAllGender: async function () {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
         try {
-            let query = { _id: { $in: [GroupID, new ObjectId(GroupID)] } };
-            let Group = await db.collection('GroupCows').findOne(query);
-            Group.cows.push(CowID);
-            let newValue = { $set: { cows: Group.cows } };
-            await db.collection('GroupCows').updateOne(query, newValue);
-            if (oldGroupID != null) {
-                let query = { _id: { $in: [oldGroupID, new ObjectId(oldGroupID)] } };
-                let Group = await db.collection('GroupCows').findOne(query);
-                let index = Group.cows.indexOf(CowID);
-                delete Group.cows[index];
-                let newValue = { $set: { cows: Group.cows } };
-                await db.collection('GroupCows').updateOne(query, newValue);
-            }
-            return Promise.resolve("OK");
+            let list = await db.collection('CowGender').find({}).toArray();
+            return Promise.resolve(list);
         } catch (error) {
             return Promise.reject(error);
         } finally {
             client.close();
         }
     },
+    getLastCowCode:async function (farmCode){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            let farm = await db.collection('LastCowCode').findOne({_farmCode:farmCode});
+            let code= farm._lastInsertedCode;
+            await db.collection('LastCowCode').updateOne({_farmCode:farmCode},{$set:{_lastInsertedCode:code+1}});
+            return Promise.resolve(code);
+        } catch (error) {
+            return Promise.reject("");
+        } finally {
+            client.close();
+        }
+    }
+
 
 }
 // dbmodel.addGroup("5bf52190fb6fc0561ffdc0e5",{"name":"Nhóm bò nhập về ngày 20/10/2020","cow":[]});

@@ -23,3 +23,6 @@ thôi thì chỉ cần làm các bước phía dưới này
 1. nếu chưa cài nodejs thì cài nodejs :)
 2. npm install
 3. npm run dev
+
+4. cd ServerExpress
+5. node index
