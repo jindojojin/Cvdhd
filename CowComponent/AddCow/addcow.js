@@ -11,31 +11,51 @@
 }*/
 const myServerUrl = "http://localhost:9000"
 var availableFarm = [];
-var availableGender=[];
-var genderInfo=[]
+var availableGender = [];
+var genderInfo = [];
 var farmInfo = [];
+var blockchainData;
 $(document).ready(function () {
-    $("#submit_btn").click(function () {
+    $("#loader").hide();
+    $("#spiner").hide();
+    $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực và tạo id cho bò
         let cowInfo = getCowInfo();
         if (validateCowInfo(cowInfo)) {
+            $("#loader").show();
+            $("#CowInfoForm").hide();
             console.log(cowInfo);
             $.ajax({
-                url:myServerUrl+"/addCow",
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify(cowInfo),
-                dataType:'json',
-                success:function(data){
-                    cowInfo._id = data._id; // lấy id do server trả về và đẩy dữ liệu lên blockchain
-                    $("#dataBlockChain").text(JSON.stringify(cowInfo));
+                url: myServerUrl + "/addCow",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(cowInfo),
+                dataType: 'json',
+                success: function (res) {
+                    // cowInfo._id = data._id; // lấy id do server trả về và đẩy dữ liệu lên blockchain
+                    cowInfo._id = res._id;
+                    let data = JSON.stringify(cowInfo);
+                    $("#dataBlockchain").text(data);
+                    $("#CowID").text(res._id);
+                    $("#CowInfoForm").show();
+                    $("#loader").hide();
                     $("#showModal").click();
+                    blockchainData=cowInfo;
+                },
+                error: function(res){
+                    console.log(res);
+                    $("#CowInfoForm").show();
                 }
             });
-            
+
         } else {
             return;
         }
     });
+    $("#pushToChain_btn").click(function(){
+        if(blockchainData._id != ""){
+            $("#spiner").show();
+        }
+    })
     $.get(myServerUrl + "/allFarm", (data, status) => {
         if (status == "success") {
             console.log(data)
@@ -59,16 +79,16 @@ $(document).ready(function () {
     });
     $("#_gender").autocomplete({
         source: availableGender
-    });$("#_fatherGender").autocomplete({
+    }); $("#_fatherGender").autocomplete({
         source: availableGender
-    });$("#_motherGender").autocomplete({
+    }); $("#_motherGender").autocomplete({
         source: availableGender
     });
-    $("#_farmID").blur(function(){
+    $("#_farmID").blur(function () {
         console.log("changed")
         // console.log(farmInfo);
         farmInfo.forEach(farm => {
-            if($("#_farmID").val() == farm._farmCode){
+            if ($("#_farmID").val() == farm._farmCode) {
                 console.log("found");
                 $("#_farmName").val(farm._name);
                 $("#_farmAddress").val(farm._address);
@@ -87,12 +107,12 @@ function getCowInfo() {
     cowInfo._birthday = $('#_birthday').val().trim();
     // console.log(new Date(cowInfo._birthday).toISOString());
     cowInfo._birthplace = $('#_birthplace').val().trim();
-    cowInfo._gender = $('#_gender').val().trim().substring(0,3);
+    cowInfo._gender = $('#_gender').val().trim().substring(0, 3);
     cowInfo._fatherID = $('#_fatherID').val().trim();
-    cowInfo._fatherGender = $('#_fatherGender').val().trim().substring(0,3);
+    cowInfo._fatherGender = $('#_fatherGender').val().trim().substring(0, 3);
     cowInfo._motherID = $('#_motherID').val().trim();
-    cowInfo._motherGender = $('#_motherGender').val().trim().substring(0,3);
-    cowInfo._farmID=$('#_farmID').val().trim();
+    cowInfo._motherGender = $('#_motherGender').val().trim().substring(0, 3);
+    cowInfo._farmID = $('#_farmID').val().trim();
     return cowInfo;
 }
 
@@ -137,16 +157,16 @@ function makeFarmSuggestion() {
     farmInfo.forEach(farm => {
         console.log(farm);
         console.log("o")
-        this.availableFarm.push({ label: (farm._farmCode + ': '+farm._name+"( " + farm._address+")"), value: farm._farmCode })
+        this.availableFarm.push({ label: (farm._farmCode + ': ' + farm._name + "( " + farm._address + ")"), value: farm._farmCode })
     });
     // console.log(this.availableFarm)
 }
 
-function  makeGenderSuggestion(){
+function makeGenderSuggestion() {
     genderInfo.forEach(gender => {
         // console.log(farm);
         // console.log("o")
-        this.availableGender.push({ label: (gender._id + ': '+gender._title), value: (gender._id + ': '+gender._title) })
+        this.availableGender.push({ label: (gender._id + ': ' + gender._title), value: (gender._id + ': ' + gender._title) })
     });
     // console.log(this.availableFarm)
 }

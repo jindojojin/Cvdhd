@@ -21,6 +21,7 @@
   <script src="../../node_modules/autocomplete-js/dist/autocomplete.min.js"></script>
 </head>
 
+<img id="loader" style="z-index:99999 ;width: 100%; height: auto;" src="https://thumbs.gfycat.com/SizzlingSmallAbalone-size_restricted.gif">
 <body>
   <br>
   <br>
@@ -114,22 +115,23 @@
     </div>
     </div>
   </form>
-  <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Đẩy dữ liệu</button>
-
+  <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Xác thực dữ liệu</button>
   <!-- //modalChain -->
   <button id="showModal" class="d-none" data-toggle="modal" data-target="#blockchainModal"></button>
-  <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Đẩy thông tin lên BlockChain</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Dữ liệu đã xác thực, đẩy thông tin lên BlockChain?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <h4>Các thông tin sau sẽ được hệ thống đẩy lên blockchain, Hãy kiểm tra kỹ thông tin trước khi thực hiện!</h4>
-          <p style=" word-wrap: break-word" id="dataBlockChain"></p>
+          <h6>Các thông tin sau sẽ được hệ thống đẩy lên blockchain, Hãy kiểm tra kỹ thông tin trước khi thực hiện!</h6>
+          <span class="badge badge-primary">ID được cấp mới:</span><p style=" word-wrap: break-word" id="CowID"></p>
+          <span class="badge badge-primary">Dữ liệu sẽ được đẩy lên:</span><p style=" word-wrap: break-word" id="dataBlockchain"></p>
+          <img id="spiner" src="https://i.pinimg.com/originals/e8/d9/76/e8d97640e2ad99f7e8689a75253e435a.gif" alt="Đang đẩy dữ liệu lên blockchain">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
