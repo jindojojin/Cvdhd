@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+
+        <h1>Coursetro Instructor</h1>
+        <span id="countIns"></span>
+
+        <h2 id="instructor"></h2>
+        <span id="insTrans"></span>
+		<hr>
+		
+		<h2 id="balance"></h2>
+        <span id="balance"></span>
+        <hr>
+
+        <img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
+
+		<label for="age" class="col-lg-2 control-label">ID</label>
+		<input id="ID" type="text">
+		
+        <label for="fName" class="col-lg-2 control-label">Data</label>
+        <input id="data" type="text">
+ 
+        
+
+        <button id="button">Update Instructor</button>
+
+		<label for="lName" class="col-lg-2 control-label">Find ID</label>
+		<input id="findid" type="number">
+		
+		<button id="btfindid">Find ID</button>
+		<button id="btfindat">Find At</button>
+
+		
+
+		<h2 id="instructor1"></h2>
+		
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+       <script>
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+
+            web3.eth.defaultAccount = web3.eth.accounts[0];
+            var CoursetroContract = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "_cowID",
+				"type": "string"
+			},
+			{
+				"name": "_data",
+				"type": "string"
+			}
+		],
+		"name": "setInstructor",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "data",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "cowID",
+				"type": "string"
+			}
+		],
+		"name": "instructorInfo",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "countInstructors",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "Id",
+				"type": "string"
+			}
+		],
+		"name": "findID",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "Id",
+				"type": "string"
+			}
+		],
+		"name": "getCowInfoById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "ID",
+				"type": "uint256"
+			}
+		],
+		"name": "getInfoAt",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+
+    var Coursetro = CoursetroContract.at('0x022756f8dcc17dfab26a8e1f6d994c366a589409');
+        console.log(Coursetro);
+
+		web3.eth.getBalance('0xcdb16d92dd1d4f279cad945f200793107d3ec89f', function(error, result){  //get blance
+   if(!error){
+	    var balance = result.c[0]/10000
+		$("#balance").html('Balance: ' + balance);
+	   }
+   else
+       console.error(error);
+})
+		
+
+		
+
+	
+		var instructorEvent = Coursetro.instructorInfo({},'latest');
+
+		       instructorEvent.watch(function(error, result) {
+           if (result) {
+			$("#loader").hide();
+
+               $("#instructor").html(result.args.cowID + ' ' + result.args.data );
+           } else {
+                $("#loader").hide();
+           }
+       });
+
+   
+	 
+	   
+	   
+       $("#button").click(function() {
+            $("#loader").show();
+           Coursetro.setInstructor(web3.eth.defaultAccount, $("#ID").val(), $("#data").val(), (err, res) => {
+               if (err) {
+                   $("#loader").hide();
+               }
+			   else{
+			   web3.eth.getBalance('0xcdb16d92dd1d4f279cad945f200793107d3ec89f', function(error, result){
+   if(!error){
+	    var balance = result.c[0]/10000
+		$("#balance").html('Balance: ' + balance);
+	   }
+	  
+   
+})}
+			   $("#insTrans").html('Transaction Hash: ' + res);
+			  
+           });
+       });
+
+      $("#btfindid").click(function() {
+		Coursetro.findID($("#findid").val(),(err, res) => {
+           if (res)
+           console.log(res);
+           });
+       });
+
+	    $("#btfindat").click(function() {
+		Coursetro.getInfoAt($("#findid").val(),(err, res) => {
+           if (res)
+           console.log(res);
+           });
+       });
+	  
+	 
+    </script>
+
+</body>
+</html>
+
