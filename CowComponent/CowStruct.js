@@ -7,155 +7,139 @@ if (typeof web3 !== 'undefined') {
 }
 
 web3.eth.defaultAccount = web3.eth.accounts[0];
-const CoursetroContract = web3.eth.contract(
-    [
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "_address",
-                    "type": "address"
-                },
-                {
-                    "name": "_cowID",
-                    "type": "string"
-                },
-                {
-                    "name": "_data",
-                    "type": "string"
-                },
-                {
-                    "name": "_type_of_data",
-                    "type": "uint8"
-                }
-            ],
-            "name": "setInstructor",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "name": "data",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "name": "cowID",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "name": "type_of_data",
-                    "type": "uint8"
-                }
-            ],
-            "name": "instructorInfo",
-            "type": "event"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "countInstructors",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [
-                {
-                    "name": "Id",
-                    "type": "string"
-                },
-                {
-                    "name": "_type",
-                    "type": "uint8"
-                }
-            ],
-            "name": "findID",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256[]"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [
-                {
-                    "name": "Id",
-                    "type": "string"
-                }
-            ],
-            "name": "getCowInfoById",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [
-                {
-                    "name": "ID",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getInfoAt",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        }
-    ]
+const CoursetroContract = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "ID",
+				"type": "uint256"
+			}
+		],
+		"name": "getInfoAt",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "Id",
+				"type": "string"
+			},
+			{
+				"name": "_type",
+				"type": "uint8"
+			}
+		],
+		"name": "findID",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "_cowID",
+				"type": "string"
+			},
+			{
+				"name": "_data",
+				"type": "string"
+			},
+			{
+				"name": "_type_of_data",
+				"type": "uint8"
+			}
+		],
+		"name": "setInstructor",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "countInstructors",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "Id",
+				"type": "string"
+			}
+		],
+		"name": "getCowInfoById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "data",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "cowID",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "type_of_data",
+				"type": "uint8"
+			}
+		],
+		"name": "instructorInfo",
+		"type": "event"
+	}
+]
 );
 
-var Coursetro = CoursetroContract.at('0x4c4f58c23a5180c45595914813fecadc8900f118');
-// console.log(Coursetro);
-
-// web3.eth.getBalance('0xcdb16d92dd1d4f279cad945f200793107d3ec89f', function (error, result) {  //get blance
-//     if (!error) {
-//         var balance = result.c[0] / 10000
-//         // $("#balance").html('Balance: ' + balance);
-//         console.log("balance" + balance)
-//     }
-//     else
-//         console.error(error);
-// })
-
-// function whenFinish() {
-    var returnEvent = Coursetro.instructorInfo({}, 'latest');
-    
-// }
+var Coursetro = CoursetroContract.at('0xd9e35a9c9f15e5035b456c732a95118f91c57b72');
+var returnEvent = Coursetro.instructorInfo({}, 'latest');
 
 function pushDataToBlockchain(id, data, typeOfData) {
     console.log("Bắt đầu đẩy dữ liệu lên block chain");

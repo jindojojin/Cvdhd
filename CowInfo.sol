@@ -16,10 +16,9 @@ contract Owned {
 contract CowInfo is Owned {
     
     struct Instructor { 
-       
         string cowID;
         string data;
-       
+        uint8 type_of_data;
     }
     
     mapping (uint => Instructor) instructors;
@@ -28,17 +27,19 @@ contract CowInfo is Owned {
     
     event instructorInfo(
        string data,
-       string cowID
+       string cowID,
+       uint8 type_of_data
     );
     
-    function setInstructor(address _address, string _cowID, string _data) onlyOwner public {
+    function setInstructor(address _address, string _cowID, string _data, uint8 _type_of_data) onlyOwner public {
         var instructor = instructors[Count];
         
         instructor.cowID = _cowID;
         instructor.data = _data;
+        instructor.type_of_data=_type_of_data;
        
         instructorAccts.push(Count) -1;
-        instructorInfo( _data, _cowID);
+        instructorInfo( _data, _cowID,_type_of_data);
         Count++;
     }
     
@@ -63,24 +64,18 @@ contract CowInfo is Owned {
       return(instructors[CowInfoIndex].data);
      
    }
-     function findID(string Id) public view returns(uint[]) {
+     function findID(string Id, uint8 _type) public view returns(uint[]) {
         uint counter = 0;
+        uint[] memory V= new uint[](Count);
         for (uint i = 0; i < Count; i++) {
-            if (stringsEqual(instructors[i].cowID,Id))
-            
-           {
+            if (stringsEqual(instructors[i].cowID,Id)&& instructors[i].type_of_data==_type){
+            V[counter]=i;
               counter++;
-              
            }
         }
         uint[] memory v = new uint[](counter);
-         uint counter1 = 0;
-        for ( i = 0;i < Count; i++) {
-           if (stringsEqual(instructors[i].cowID,Id))
-           {
-                v[counter1] = i;
-                counter1++;
-            }
+        for ( i = 0;i < counter; i++) {
+           v[i]=V[i];
         }
 
         return v;
