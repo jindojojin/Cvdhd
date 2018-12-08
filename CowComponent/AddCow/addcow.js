@@ -9,7 +9,8 @@
     _motherID,    // nếu không có sẽ truyền -1
     _motherGender,//(Mã giống của mẹ) chuỗi <= 30 kí tự (tiếng việt có dấu)
 }*/
-const myServerUrl = "http://localhost:9000"
+// import { Coursetro } from '../CowStruct.js';
+const myServerUrl = "http://localhost:9000";
 var availableFarm = [];
 var availableGender = [];
 var genderInfo = [];
@@ -22,7 +23,7 @@ $(document).ready(function () {
         let cowInfo = getCowInfo();
         if (validateCowInfo(cowInfo)) {
             $("#loader").show();
-            $("#CowInfoForm").hide();
+            // $("#CowInfoForm").hide();
             console.log(cowInfo);
             $.ajax({
                 url: myServerUrl + "/addCow",
@@ -30,45 +31,54 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 data: JSON.stringify(cowInfo),
                 dataType: 'json',
-                success: function (res) {
+                success: function (data) {
+                    console.log("success")
                     // cowInfo._id = data._id; // lấy id do server trả về và đẩy dữ liệu lên blockchain
-                    cowInfo._id = res._id;
-                    let data = JSON.stringify(cowInfo);
-                    $("#dataBlockchain").text(data);
-                    $("#CowID").text(res._id);
+                    console.log(data);
+                    cowInfo._id = data._id;
+                    blockchainData = JSON.stringify(cowInfo);
+                    $("#dataBlockchain").text(blockchainData);
+                    $("#CowID").text(data._id);
                     $("#CowInfoForm").show();
                     $("#loader").hide();
                     $("#showModal").click();
-                    blockchainData=cowInfo;
+                    $("#closeChainModal").show();
+                    $("#pushToChain_btn").show();
+                    // b = data;
                 },
-                error: function(res){
+                error: function (res) {
                     console.log(res);
                     $("#CowInfoForm").show();
                 }
             });
-
         } else {
+            $("#loader").hide()
+
             return;
         }
     });
-    $("#pushToChain_btn").click(function(){
-        if(blockchainData._id != ""){
+    $("#pushToChain_btn").click(function () {
+        console.log("đã gọi đế nút đẩy blockchain");
+        if (blockchainData._id != "") {
+            let id = JSON.parse(blockchainData)._id;
+            console.log("called to pushToBlockChain");
+            //1 la kieu CowInfo
+            let type = 1;
             $("#spiner").show();
+            pushDataToBlockchain(id, blockchainData, type);
         }
     })
     $.get(myServerUrl + "/allFarm", (data, status) => {
         if (status == "success") {
-            console.log(data)
+            // console.log(data)
             farmInfo = JSON.parse(data);
-            // console.log(farmInfo)
             makeFarmSuggestion(farmInfo);// tạo data cho gợi ý khi nhập mã trang trại
         }
     });
     $.get(myServerUrl + "/allGender", (data, status) => {
         if (status == "success") {
-            console.log(data)
+            // console.log(data)
             genderInfo = JSON.parse(data);
-            // console.log(farmInfo)
             makeGenderSuggestion();// tạo data cho gợi ý khi nhập mã trang trại
         }
     })
@@ -113,10 +123,12 @@ function getCowInfo() {
     cowInfo._motherID = $('#_motherID').val().trim();
     cowInfo._motherGender = $('#_motherGender').val().trim().substring(0, 3);
     cowInfo._farmID = $('#_farmID').val().trim();
+    console.log(cowInfo);
     return cowInfo;
 }
 
 function validateCowInfo(cowInfo) {
+    console.log("bat dau validate");
     var ok = true;
     //Đặt lại color bình thường
     $('#_id').css('border-color', '');
@@ -150,13 +162,14 @@ function validateCowInfo(cowInfo) {
         $('#_birthday').css('border-color', 'red');
         ok = false;
     }
+    console.log("ket thuc validate");
+
     return ok;
 }
 
 function makeFarmSuggestion() {
     farmInfo.forEach(farm => {
-        console.log(farm);
-        console.log("o")
+        // console.log(farm);
         this.availableFarm.push({ label: (farm._farmCode + ': ' + farm._name + "( " + farm._address + ")"), value: farm._farmCode })
     });
     // console.log(this.availableFarm)
@@ -170,3 +183,14 @@ function makeGenderSuggestion() {
     });
     // console.log(this.availableFarm)
 }
+// Biến import từ CowStruct để theo dõi kết quả đẩy lên blockchain
+returnEvent.watch(function (error, result) {
+    if (result) {
+        $("#loader").hide();
+        // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
+        console.log(result.args);
+        $("#closeChainModal").click();
+    } else {
+        $("#loader").hide();
+    }
+});

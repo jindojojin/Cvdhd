@@ -10,18 +10,20 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="../../node_modules/jquery/dist/jquery.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  <script src="addcow.js"></script>
   <!-- import module tự động hoàn thành form cho việc tìm kiếm trang trại nhập dữ liệu -->
-  <link href="../../node_modules/autocomplete-js/dist/autocomplete.min.css" rel="stylesheet">
-  <script src="../../node_modules/autocomplete-js/dist/autocomplete.min.js"></script>
+  <script src="../../node_modules/web3/dist/web3.min.js"></script>
+  <script src="../CowStruct.js"></script>
+  <script src="addcow.js"></script>
 </head>
+<div id="loader" style="z-index:99999 ;width: 100%; height: 100%; background-color: rgb(114, 114, 114);opacity: 0%;">
+  <img style="display: block; margin-left: auto; margin-right: auto;padding-top: 25%; margin-bottom: auto;" class="center"
+    width="80px" height="auto" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif">
+</div>
 
-<img id="loader" style="z-index:99999 ;width: 100%; height: auto;" src="https://thumbs.gfycat.com/SizzlingSmallAbalone-size_restricted.gif">
 <body>
   <br>
   <br>
@@ -48,7 +50,7 @@
           </div>
         </div>
       </div>
-    <!-- </div>
+      <!-- </div>
     <div class="row mt-2"> -->
       <div class="col">
         <h3 class="text-success">Thông tin bò</h3>
@@ -57,12 +59,7 @@
             <label>Số hiệu</label>
             <input id="_id" class="form-control" type="text">
             <input id="_id2" type="checkbox" onclick="show_id_input()"> Bò mới sinh / chưa có số hiệu
-            <script>
-              function show_id_input() {
-                if ($('#_id2').is(":checked")) { $('#_id').hide(); $('#_id').val() = ''; }
-                else { $('#_id').show(); }
-              }
-            </script>
+            
           </div>
           <div class="form-group">
             <label>Giống</label>
@@ -115,7 +112,7 @@
     </div>
     </div>
   </form>
-  <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Xác thực dữ liệu</button>
+  <button id="submit_btn" class="btn btn-success float-right mt-5 mr-5" type="submit">Xác thực dữ liệu</button>
   <!-- //modalChain -->
   <button id="showModal" class="d-none" data-toggle="modal" data-target="#blockchainModal"></button>
   <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -129,15 +126,23 @@
         </div>
         <div class="modal-body">
           <h6>Các thông tin sau sẽ được hệ thống đẩy lên blockchain, Hãy kiểm tra kỹ thông tin trước khi thực hiện!</h6>
-          <span class="badge badge-primary">ID được cấp mới:</span><p style=" word-wrap: break-word" id="CowID"></p>
-          <span class="badge badge-primary">Dữ liệu sẽ được đẩy lên:</span><p style=" word-wrap: break-word" id="dataBlockchain"></p>
-          <img id="spiner" src="https://i.pinimg.com/originals/e8/d9/76/e8d97640e2ad99f7e8689a75253e435a.gif" alt="Đang đẩy dữ liệu lên blockchain">
+          <span class="badge badge-primary">ID được cấp mới:</span>
+          <p style=" word-wrap: break-word" id="CowID"></p>
+          <span class="badge badge-primary">Dữ liệu sẽ được đẩy lên:</span>
+          <p style=" word-wrap: break-word" id="dataBlockchain"></p>
+          <img id="spiner" src="https://4.bp.blogspot.com/-wtnu5Txw2Ek/WyoYo1OsfjI/AAAAAAAAEPg/c1ZtUzAfAVUYDG0nYH5fGghcOP5qWsZVACLcBGAs/s320/gif-loading91.gif" alt="Đang đẩy dữ liệu lên blockchain">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-          <button type="button" class="btn btn-primary">Đẩy lên BlockChain</button>
+          <button id="closeChainModal" type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+          <button id="pushToChain_btn" type="button" class="btn btn-primary">Đẩy lên BlockChain</button>
         </div>
       </div>
     </div>
   </div>
 </body>
+<script>
+  function show_id_input() {
+    if ($('#_id2').is(":checked")) { $('#_id').hide(); $('#_id').val() = ''; }
+    else { $('#_id').show(); }
+  }
+</script>

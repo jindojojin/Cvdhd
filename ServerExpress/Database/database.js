@@ -59,6 +59,19 @@ var dbmodel = {
             client.close();
         }
     },
+    addHealth: async function (healthInfo) {
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            await db.collection('Health').insertOne(healthInfo)
+            return Promise.resolve("OK");
+        } catch (error) {
+            console.log(error)
+            return Promise.reject(error);
+        } finally {
+            client.close();
+        }
+    },
     getAllFarm: async function () {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
@@ -77,6 +90,21 @@ var dbmodel = {
         try {
             let list = await db.collection('CowGender').find({}).toArray();
             return Promise.resolve(list);
+        } catch (error) {
+            return Promise.reject(error);
+        } finally {
+            client.close();
+        }
+    },
+    getCowInfo:async function(cowID){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            let query={_id:cowID}
+            let cow = await db.collection('CowGender').findOne(query);
+            let farm = await db.collection('Farm').findOne({_farmCode:cow._farmID});
+            cow._farmName=farm._farmCode+farm._name;
+            return Promise.resolve(cow);
         } catch (error) {
             return Promise.reject(error);
         } finally {

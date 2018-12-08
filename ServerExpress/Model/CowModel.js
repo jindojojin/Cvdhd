@@ -26,6 +26,14 @@ var CowModel = {
         } catch (error) {
             return Promise.reject("")
         }
+    },
+    addHealth: async function (healthInfo) {
+        try {
+            await db.addHealth(healthInfo);
+            return Promise.resolve("");
+        } catch (error) {
+            return Promise.reject("")
+        }
     }
 }
 module.exports = CowModel;

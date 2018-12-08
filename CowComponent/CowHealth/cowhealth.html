@@ -10,106 +10,71 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="../../node_modules/jquery/dist/jquery.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="../../node_modules/web3/dist/web3.min.js"></script>
+    <script src="../CowStruct.js"></script>
     <script src="cowhealth.js"></script>
-    <!-- import module tự động hoàn thành form cho việc tìm kiếm trang trại nhập dữ liệu -->
-    <link href="../../node_modules/autocomplete-js/dist/autocomplete.min.css" rel="stylesheet">
-    <script src="../../node_modules/autocomplete-js/dist/autocomplete.min.js"></script>
 </head>
-<div id="loader" style="z-index:99999 ;width: 100%; height: 100%; background-color: black;opacity: 60%;">
-    <img class ="center" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif">
+<div id="loader" style="z-index:99999 ;width: 100%; height: 100%; background-color: rgb(114, 114, 114);opacity: 0%;">
+    <img style="display: block; margin-left: auto; margin-right: auto;padding-top: 25%; margin-bottom: auto;" class="center"
+        width="80px" height="auto" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif">
 </div>
 
-<!-- <body>
+<body>
     <br>
     <br>
-    <form id="CowInfoForm" style="width:100%">
+    <form id="CowHealthInfoForm" style="width:100%">
         <div class="row">
             <div class="col ">
                 <h3 class="text-success">Đối tượng bò</h3>
                 <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
                     <div class="form-group">
-                        <label>Mã trang trại</label>
-                        <input id="_farmID" class="form-control" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label>Tên trang trại</label>
-                        <input id="_farmName" class="form-control" type="text" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <input id="_farmAddress" class="form-control" type="text" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>Tên chủ trang trại</label>
-                        <input id="_farmOwner" class="form-control" type="text" disabled>
-                    </div>
-                </div>
-            </div>
-            <!-- </div>
-          <div class="row mt-2"> -->
-            <div class="col">
-                <h3 class="text-success">Thông tin bò</h3>
-                <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
-                    <div class="form-group">
                         <label>Số hiệu</label>
-                        <input id="_id" class="form-control" type="text">
-                        <input id="_id2" type="checkbox" onclick="show_id_input()"> Bò mới sinh / chưa có số hiệu
-                        <script>
-                            function show_id_input() {
-                                if ($('#_id2').is(":checked")) { $('#_id').hide(); $('#_id').val() = ''; }
-                                else { $('#_id').show(); }
-                            }
-                        </script>
+                        <input id="_cowID" name="_cowID" class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Giống</label>
-                        <input id="_gender" class="form-control" type="text">
+                        <input id="_gender" class="form-control" type="text" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Giới tính:</label>
-                        <select id="_sex">
-                            <option value="1">Đực</option>
-                            <option value="0">Cái</option>
-                        </select>
+                        <label>Ngày sinh</label>
+                        <input id="_birthday" class="form-control" type="text" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Ngày tháng năm sinh</label>
-                        <input id="_birthday" class="form-control" type="date">
+                        <label>Tuổi</label>
+                        <input id="_cowAge" class="form-control" type="text" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Nơi sinh</label>
-                        <input id="_birthplace" class="form-control" type="text">
+                        <label>Thuộc trang trại</label>
+                        <input id="_farm" class="form-control" type="text" disabled>
                     </div>
                 </div>
             </div>
-
             <div class="col mr-5">
-                <h3 class="text-success">Thông tin huyết thống</h3>
+                <h3 class="text-success">Bản ghi theo dõi sức khỏe</h3>
                 <div class="container" style="border:solid 1px; border-radius:4px; border-color: #218838">
-                    <h5 class="text-success">Bò bố</h5>
                     <div class="form-group">
-                        <label>Số hiệu</label>
-                        <input id="_fatherID" class="form-control" type="text">
+                        <label>Ngày kiểm tra</label>
+                        <input id="_checkDay" name="_checkDay" class="form-control" type="date">
                     </div>
                     <div class="form-group">
-                        <label>Giống</label>
-                        <input id="_fatherGender" class="form-control" type="text">
-                    </div>
-                </div>
-                <div class="container mt-1" style="border:solid 1px; border-radius:4px; border-color: #218838">
-                    <h5 class="text-success">Bò mẹ</h5>
-                    <div class="form-group">
-                        <label>Số hiệu</label>
-                        <input id="_motherID" class="form-control" type="text">
+                        <label>Tên người kiểm tra</label>
+                        <input id="_checkerName" name="_checkerName" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label>Giống</label>
-                        <input id="_motherGender" class="form-control" type="text">
+                        <label>Chiều cao của bò( cm)</label>
+                        <input id="_cowHeight" name="_cowHeight" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Bề ngang của bò( cm)</label>
+                        <input id="_cowWidth" name="_cowWidth" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Cân nặng của bò( kg)</label>
+                        <input id="_cowWeight" name="_cowWeight" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -117,8 +82,8 @@
         </div>
         </div>
     </form>
-    <button id="submit_btn" class="btn btn-success float-right mr-5" type="submit">Xác thực dữ liệu</button>
-    <!-- //modalChain -->
+    <button id="submit_btn" class="btn btn-success float-right mr-5 mt-4" type="submit">Kiểm tra dữ liệu</button>
+
     <button id="showModal" class="d-none" data-toggle="modal" data-target="#blockchainModal"></button>
     <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -132,18 +97,18 @@
                 <div class="modal-body">
                     <h6>Các thông tin sau sẽ được hệ thống đẩy lên blockchain, Hãy kiểm tra kỹ thông tin trước khi thực
                         hiện!</h6>
-                    <span class="badge badge-primary">ID được cấp mới:</span>
+                    <span class="badge badge-primary">ID của bò:</span>
                     <p style=" word-wrap: break-word" id="CowID"></p>
                     <span class="badge badge-primary">Dữ liệu sẽ được đẩy lên:</span>
                     <p style=" word-wrap: break-word" id="dataBlockchain"></p>
-                    <img id="spiner" src="https://i.pinimg.com/originals/e8/d9/76/e8d97640e2ad99f7e8689a75253e435a.gif"
+                    <img id="spiner" src="https://4.bp.blogspot.com/-wtnu5Txw2Ek/WyoYo1OsfjI/AAAAAAAAEPg/c1ZtUzAfAVUYDG0nYH5fGghcOP5qWsZVACLcBGAs/s320/gif-loading91.gif"
                         alt="Đang đẩy dữ liệu lên blockchain">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Đẩy lên BlockChain</button>
+                    <button id="closeChainModal" type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button id="pushToChain_btn" type="button" class="btn btn-primary">Đẩy lên BlockChain</button>
                 </div>
             </div>
         </div>
     </div>
-</body> -->
+</body>

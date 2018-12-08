@@ -22,12 +22,11 @@ https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js
 <body>
 
 	<nav class="navbar navbar-expand-lg bg-dark">
-			<a style="color:white" class="ml-4 navbar-brand" routerLink>Hệ thống quản lý dữ liệu truy xuất nguồn gốc thịt bò </a>
-			<div class="collapse navbar-collapse"></div>
-			<div class="btn btn-group float-right">
-			  <button class="btn btn-success my-2 my-sm-0" routerLink="register">Register +</button>
-			  <button class="btn btn-success my-2 my-sm-0" routerLink="login">Login</button>
-			</div>
+		<a style="color:white" class="ml-4 navbar-brand" routerLink>Hệ thống quản lý dữ liệu truy xuất nguồn gốc thịt bò </a>
+		<div class="collapse navbar-collapse"></div>
+		<div class="btn btn-group float-right">
+			<button class="btn btn-success my-2 my-sm-0">Login</button>
+		</div>
 	</nav>
 
 	<div class="container-fluid">
@@ -43,46 +42,59 @@ https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js
 							</a>
 						</li> -->
 						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('addCow')" >
+							<button class="btn btn-link nav-link text-success" onclick="changePage('addCow')">
 								<i class="fas fa-archway"></i>
 								<span data-feather="bar-chart-2"></span>
 								Thêm bò mới
 							</button>
 						</li>
 						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('cowHealth')" >
+							<button class="btn btn-link nav-link text-success" onclick="changePage('cowHealth')">
 								<i class="fas fa-user-md"></i>
 								<span data-feather="file"></span>
 								Theo dõi sức khỏe
-							</a>
+								</a>
 						</li>
 						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('vaccine')" >
+							<button class="btn btn-link nav-link text-success" onclick="changePage('vaccine')">
 								<i class="fas fa-syringe"></i>
 								<span data-feather="layers"></span>
 								Sử dụng thuốc thú y
 							</button>
 						</li>
 						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('food')" >
+							<button class="btn btn-link nav-link text-success" onclick="changePage('food')">
 								<i class="fas fa-apple-alt"></i>
 								<span data-feather="layers"></span>
 								Cập nhập thức ăn
 							</button>
 						</li>
 						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('sellCow')" >
+							<button class="btn btn-link nav-link text-success" onclick="changePage('sellCow')">
 								<i class="fas fa-truck-moving"></i>
 								<span data-feather="shopping-cart"></span>
 								Xuất/ bán bò
 							</button>
 						</li>
+						<br>
+						<li class="nav-item">
+							<!-- <div class="row">
+								<div class="col-2">
+									<img width="10px" style="padding-top:100%" height="auto" src="https://4.bp.blogspot.com/-wtnu5Txw2Ek/WyoYo1OsfjI/AAAAAAAAEPg/c1ZtUzAfAVUYDG0nYH5fGghcOP5qWsZVACLcBGAs/s320/gif-loading91.gif"
+									 alt="Đang đẩy dữ liệu lên blockchain">
+								</div>
+								<div class="col-10">
+									<p class="text-success">sdàdsfsadfads</p>
+								</div>
+							</div> -->
+						</li>
 					</ul>
 				</div>
 			</nav>
 			<div id="router" class="col-md-9 ml-sm-auto col-lg-10">
-					<iframe style="overflow:hidden; 
-					display:block; position: absolute; height: 100%; width: 100%" scrolling="no" frameborder="0" src="CowComponent/AddCow/addcow.html"></iframe>
+				<iframe style="overflow:hidden; 
+					display:block; position: absolute; height: 100%; width: 100%" scrolling="no"
+				 frameborder="0" src="CowComponent/AddCow/addcow.html"></iframe>
 			</div>
 		</div>
 	</div>
