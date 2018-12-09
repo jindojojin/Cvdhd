@@ -12,8 +12,10 @@
   "dependencies": {
     "autocomplete-js": "^2.7.1",
     "body-parser": "^1.18.3",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.15",
     "validator": "^10.9.0",

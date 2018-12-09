@@ -67,7 +67,10 @@ app.get('/allGender', (req, res) => {
             res.send();
         })
 })
-
+app.post('/login',jsonread.json(),(req,res)=>{
+    console.log(req.body);
+    
+})
 app.listen(9000, () => {
     console.log("Express đang hoạt động!")
 })
