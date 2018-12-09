@@ -1,0 +1,210 @@
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.navbar, .dropdown-menu{
+background:rgba(255,255,255,0.25);
+border: none;
+
+
+}
+
+h4{
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    margin: 10px 0;
+    color: #3a3a3a!important;
+    font-size: 20px;
+}
+.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a, .dropdown-menu>li{
+  border-bottom: 3px solid transparent;
+}
+.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+  border-bottom: 3px solid transparent;
+  background: none;
+}
+.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .navbar-toggle{
+ color: #fff;
+}
+.dropdown-menu{
+      -webkit-box-shadow: none;
+    box-shadow:none;
+    background: #8999A8;
+}
+
+.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+  border-bottom: #C4E17F 3px solid;
+ 
+}
+.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2){
+  border-bottom: #F7FDCA 3px solid;
+ 
+}
+.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3){
+  border-bottom: #FECF71 3px solid;
+  
+}
+.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4){
+  border-bottom: #F0776C 3px solid;
+}
+.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5){
+  border-bottom: #DB9DBE 3px solid;
+}
+.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6){
+  border-bottom: #C49CDE 3px solid;
+}
+.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7){
+  border-bottom: #669AE1 3px solid;
+}
+.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8){
+  border-bottom: #62C2E4 3px solid;
+}
+
+.navbar-toggle .icon-bar{
+    color: #fff;
+    background: #fff;
+}
+#intro{
+
+}
+</style>
+<body style="width: 100%">
+
+<div class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top" style="background: #8999A8;">
+            <a class="navbar-brand" href="#">MCOW</a>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#" class="">Home</a></li>
+                        
+                        <li><a href="#">Thêm mới</a></li>
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cập nhật <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Thông số</a></li>
+                                <li><a href="#">Thức ăn</a></li>
+                                <li><a href="#">Tiêm phòng</a></li>
+                                <li><a href="#">Sức khỏe</a></li>
+                            </ul>
+                        </li>
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Khác<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Xuất chuồng</a></li>
+                                <li><a href="#">Bị chết</a></li>
+                                
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    <ul class="nav navbar-nav pull-right" style="float:right">
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Thay đổi mật khẩu</a></li>
+                                <li><a href="#">Thông tin tài khoản</a></li>
+                            </ul>
+                        </li>
+                        <li class=""><a href="#">Đăng xuất</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+    </div>
+</div>
+
+<div id="mainbody">
+<div id="intro" style="padding-top: 60px; padding-bottom:9px;padding-left: 10px; border-bottom: solid 1px">
+	<h4>Thông tin xuất chuồng của bò</h4>
+	
+</div>
+<br>
+<br>
+<div class="container" style="width: 95%">
+    <form id="CowHealthInfoForm" style="width:100%">
+        <div class="row">
+            <div style="width:47%; float:left">
+                <h4 >Đối tượng bò</h4>
+                <div class="container" style="border:solid 1px; border-radius:4px; padding-top:10px; border-color: #8999A8; width: 100%;">
+                    <div class="form-group">
+                        <label>Số hiệu</label>
+                        <input id="_cowID" name="_cowID" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Giống</label>
+                        <input id="_gender" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input id="_birthday" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Tuổi</label>
+                        <input id="_cowAge" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Thuộc trang trại</label>
+                        <input id="_farm" class="form-control" type="text" disabled>
+                    </div>
+                </div>
+            </div>
+            <div style="width:6%; float: left">
+            	<p></p>
+            </div>	
+            <div style="width:47%; float:left">
+                <h4>Thông tin xuất chuồng</h4>
+                <div class="container" style="border:solid 1px;padding-top:10px ; border-radius:4px; border-color: #8999A8; width: 100%">
+                    <div class="form-group">
+                        <label>Ngày xuất chuồng</label>
+                        <input id="_checkDay" name="_checkDay" class="form-control" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên người phụ trách</label>
+                        <input id="_checkerName" name="_checkerName" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Cân nặng</label>
+                        <input id="_cowWeight" name="_cowWeight" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Chiều cao</label>
+                        <input id="_cowHeight" name="_cowHeight" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Chiều dài</label>
+                        <input id="_cowWidth" name="_cowWidth" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Nơi xuất đến</label>
+                        <input id="_cowWidth" name="_cowSell" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Lý do xuất chuồng</label>
+                        <input id="_cowWeight" name="_cowReason" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </form>
+     <button id="submit_btn" class="btn btn-success" style="float: right;" type="submit">Kiểm tra dữ liệu</button>
+      
+      </div>  
+
+</div>
+
+</body>
