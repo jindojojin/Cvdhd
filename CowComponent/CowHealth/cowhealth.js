@@ -1,4 +1,4 @@
-const myServerUrl = "http://localhost:9000";
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var healthInfo = {};
 $(document).ready(function () {
     $("#loader").hide();
@@ -18,28 +18,47 @@ $(document).ready(function () {
             pushDataToBlockchain(id, blockchainData, type);
         }
     });
-    $("#CowHealthInfoForm").validate({
-        rules: {
-            _cowID: "required",
-            _checkDate: "required",
-            _cowHeight: "required",
-            _checkerName: {
-                required: true,
-                minlength: 2
-            }
-        },
-        messages: {
-            _cowID: "Vui lòng nhập họ",
-            _checkDate: "Vui lòng nhập tên",
-            _cowHeight: "kiding me?",
-            _checkerName: {
-                required: "Vui lòng nhập địa chỉ",
-                minlength: "Địa chỉ ngắn vậy, chém gió ah?"
-            }
-        }
-    })
+    $("#_cowID").blur(function () {
+        console.log("changed")
+        // console.log(farmInfo);
+        getCowInfo();
+    });
+    $("#_checkDay").blur(function () {
+        console.log("changed")
+        // console.log(farmInfo);
+        $("#_cowAge").val(caculateAge()+ " (tháng tuổi)");
+    });
 })
-
+var cowInfo;
+function getCowInfo(){  // lay thong tin cua con bo khi da nhập mã
+    $.ajax({
+        url: myServerUrl + "/cowInfo/"+$("#_cowID").val(),
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+            $("#_gender").val(res._gender+": "+res._genderName);
+            $("#_birthday").val(res._birthday);
+            $("#_farm").val(res._farmName);
+        },
+        error: function (error) {
+            window.alert("Cảnh báo: Con bò bạn vừa nhập chưa tồn tại trên hệ thống!")
+            console.log("thaat bai")
+            console.log(error);
+            $("#loader").hide();
+            $("#CowInfoForm").show();
+        }
+    });
+}
+function caculateAge(){
+    let dt2 = new Date($("#_checkDay").val());
+    let dt1 = new Date($("#_birthday").val());
+    console.log(dt1);
+    console.log(dt2);
+    //Get 1 day in milliseconds
+    return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24*30));
+}
 
 function getCowHealthInfo() {
     let x = $("#CowHealthInfoForm").serializeArray();
@@ -54,7 +73,6 @@ function validateCowInfo() {
 function pushDataToSerVer() {
     $("#loader").show();
     $("#CowHealthInfoForm").hide();
-    $("#showModal").click();
     $.ajax({
         url: myServerUrl + "/addHealth",
         type: 'POST',
@@ -69,6 +87,7 @@ function pushDataToSerVer() {
             blockchainData = JSON.stringify(healthInfo);
             $("#dataBlockchain").text(blockchainData);
             $("#CowID").text(cowID);
+            $("#showModal").click();
             $("#closeChainModal").show();
             $("#pushToChain_btn").show();
             $("#CowHealthInfoForm").show();
@@ -83,3 +102,14 @@ function pushDataToSerVer() {
         }
     });
 }
+// Biến import từ CowStruct để theo dõi kết quả đẩy lên blockchain
+returnEvent.watch(function (error, result) {
+    if (result) {
+        $("#loader").hide();
+        // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
+        console.log(result.args);
+        $("#closeChainModal").click();
+    } else {
+        $("#loader").hide();
+    }
+});

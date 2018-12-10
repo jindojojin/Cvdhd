@@ -7,138 +7,139 @@ if (typeof web3 !== 'undefined') {
 }
 
 web3.eth.defaultAccount = web3.eth.accounts[0];
-const CoursetroContract = web3.eth.contract([
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "ID",
-				"type": "uint256"
-			}
-		],
-		"name": "getInfoAt",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "Id",
-				"type": "string"
-			},
-			{
-				"name": "_type",
-				"type": "uint8"
-			}
-		],
-		"name": "findID",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			},
-			{
-				"name": "_cowID",
-				"type": "string"
-			},
-			{
-				"name": "_data",
-				"type": "string"
-			},
-			{
-				"name": "_type_of_data",
-				"type": "uint8"
-			}
-		],
-		"name": "setInstructor",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "countInstructors",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "Id",
-				"type": "string"
-			}
-		],
-		"name": "getCowInfoById",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "data",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "cowID",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "type_of_data",
-				"type": "uint8"
-			}
-		],
-		"name": "instructorInfo",
-		"type": "event"
-	}
-]
+const CoursetroContract = web3.eth.contract(
+	[
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "ID",
+					"type": "uint256"
+				}
+			],
+			"name": "getInfoAt",
+			"outputs": [
+				{
+					"name": "",
+					"type": "string"
+				},
+				{
+					"name": "",
+					"type": "string"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "Id",
+					"type": "string"
+				},
+				{
+					"name": "_type",
+					"type": "uint8"
+				}
+			],
+			"name": "findID",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256[]"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "_address",
+					"type": "address"
+				},
+				{
+					"name": "_cowID",
+					"type": "string"
+				},
+				{
+					"name": "_data",
+					"type": "string"
+				},
+				{
+					"name": "_type_of_data",
+					"type": "uint8"
+				}
+			],
+			"name": "setInstructor",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "countInstructors",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "Id",
+					"type": "string"
+				}
+			],
+			"name": "getCowInfoById",
+			"outputs": [
+				{
+					"name": "",
+					"type": "string"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "data",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"name": "cowID",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"name": "type_of_data",
+					"type": "uint8"
+				}
+			],
+			"name": "instructorInfo",
+			"type": "event"
+		}
+	]
 );
 
-var Coursetro = CoursetroContract.at('0xd9e35a9c9f15e5035b456c732a95118f91c57b72');
+var Coursetro = CoursetroContract.at('0xfee005ca5e3557925e21b5c3dccebd55aa6ffaa8');
 var returnEvent = Coursetro.instructorInfo({}, 'latest');
 
 function pushDataToBlockchain(id, data, typeOfData) {
@@ -164,6 +165,5 @@ function pushDataToBlockchain(id, data, typeOfData) {
             })
 
         }
-
     });
 }

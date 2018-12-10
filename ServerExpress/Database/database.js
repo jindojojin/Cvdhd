@@ -19,6 +19,21 @@ var dbmodel = {
             client.close();
         }
     },
+    addLog: async function(message,transaction_hash){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            await db.collection('Log').insertOne({
+                "message":message,
+                "transaction_hash":transaction_hash
+            })
+            return Promise.resolve("OK");
+        } catch (error) {
+            return Promise.reject(error);
+        } finally {
+            client.close();
+        }
+    },
     addFarm: async function (FarmInfo) {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
@@ -101,9 +116,11 @@ var dbmodel = {
         let db = client.db('cvdhd');
         try {
             let query={_id:cowID}
-            let cow = await db.collection('CowGender').findOne(query);
+            let cow = await db.collection('Cow').findOne(query);
+            let gender = await db.collection('CowGender').findOne({_id:cow._gender});
             let farm = await db.collection('Farm').findOne({_farmCode:cow._farmID});
-            cow._farmName=farm._farmCode+farm._name;
+            cow._farmName=farm._farmCode+" "+farm._name;
+            cow._genderName=gender._title;
             return Promise.resolve(cow);
         } catch (error) {
             return Promise.reject(error);

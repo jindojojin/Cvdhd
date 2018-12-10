@@ -10,7 +10,7 @@
     _motherGender,//(Mã giống của mẹ) chuỗi <= 30 kí tự (tiếng việt có dấu)
 }*/
 // import { Coursetro } from '../CowStruct.js';
-const myServerUrl = "http://localhost:9000";
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var availableFarm = [];
 var availableGender = [];
 var genderInfo = [];
@@ -107,7 +107,49 @@ $(document).ready(function () {
             }
         });
     });
-});
+    $("#_fatherID").blur(function () {
+        getCow($("#_fatherID").val(),1);//lấy thông tin ở server
+    });
+    $("#_motherID").blur(function () {
+        getCow($("#_motherID").val(),0);//lấy thông tin ở server
+    });
+})
+var cowInfo;
+function getCow(cowID,type){  // lay thong tin cua con bo khi da nhập mã
+    $.ajax({
+        url: myServerUrl + "/cowInfo/"+cowID,
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+            if(type==1)
+            $("#_fatherGender").val(res._gender+": "+res._genderName);
+            if(type==0)
+            $("#_motherGender").val(res._gender+": "+res._genderName);
+           
+        },
+        error: function (error) {
+            if(type==1)
+            window.alert("Cảnh báo: Thông tin về bò bố bạn vừa nhập không tồn tại trên hệ thống!")
+            if(type==0)
+            window.alert("Cảnh báo: Thông tin về bò mẹ bạn vừa nhập không tồn tại trên hệ thống!")
+            
+            console.log("thaat bai")
+            console.log(error);
+            $("#loader").hide();
+            $("#CowInfoForm").show();
+        }
+    });
+}
+function caculateAge(){
+    let dt2 = new Date($("#_checkDay").val());
+    let dt1 = new Date($("#_birthday").val());
+    console.log(dt1);
+    console.log(dt2);
+    //Get 1 day in milliseconds
+    return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24*30));
+}
 
 
 function getCowInfo() {
@@ -188,6 +230,8 @@ returnEvent.watch(function (error, result) {
     if (result) {
         $("#loader").hide();
         // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
+        message="";
+        
         console.log(result.args);
         $("#closeChainModal").click();
     } else {

@@ -16,10 +16,12 @@ var CowModel = {
 
     addCow: async function (cowInfo) {
         try {
-            let id = await this.generateCowCode(cowInfo._farmID);
-            console.log("id:");
-            console.log(id);
+            if(cowInfo._id == ""){
+            var id = await this.generateCowCode(cowInfo._farmID);
+            // console.log("id:");
+            // console.log(id);
             cowInfo._id = id;
+            }
             cowInfo.status = '';
             await db.addCow(cowInfo);
             return Promise.resolve(id);

@@ -1,117 +1,136 @@
-<!--
-The post that goes with this pen:
-https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js 
--->
+<!DOCTYPE html>
+<html>
 
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	 crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	 crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	 crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	 crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-	 crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- <link href="main.css" rel="stylesheet"> -->
-	<script src="index.js"></script>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+    <script src="../CowStruct.js"></script>
+    <link rel="stylesheet" href="./index.css">
 </head>
-
 <body>
+    <div class="navbar-wrapper">
+        <div class="container-fluid">
+            <nav class="navbar navbar-fixed-top" style="background: #8999A8;">
+                <a class="navbar-brand" href="#" onclick="changePage('home')">MCOW</a>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-	<nav class="navbar navbar-expand-lg bg-dark">
-		<a style="color:white" class="ml-4 navbar-brand" routerLink>Hệ thống quản lý dữ liệu truy xuất nguồn gốc thịt bò </a>
-		<div class="collapse navbar-collapse"></div>
-		<div class="btn btn-group float-right">
-			<button class="btn btn-success my-2 my-sm-0">Login</button>
-		</div>
-	</nav>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#" class="" onclick="changePage('home')">Home</a></li>
 
-	<div class="container-fluid">
-		<div class="row">
-			<nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height:150vh">
-				<div class="sidebar-sticky">
-					<ul class="nav flex-column">
-						<!-- <li class="nav-item">
-							<button class="btn btn-link nav-link active  text-success" onclick="changePage('image')" >
-								<i class="fas fa-images"></i>
-								<span data-feather="home"></span>
-								Dữ liệu ảnh<span class="sr-only">(current)</span>
-							</a>
-						</li> -->
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('addCow')">
-								<i class="fas fa-archway"></i>
-								<span data-feather="bar-chart-2"></span>
-								Thêm bò mới
-							</button>
-						</li>
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('cowHealth')">
-								<i class="fas fa-user-md"></i>
-								<span data-feather="file"></span>
-								Theo dõi sức khỏe
-								</a>
-						</li>
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('vaccine')">
-								<i class="fas fa-syringe"></i>
-								<span data-feather="layers"></span>
-								Sử dụng thuốc thú y
-							</button>
-						</li>
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('food')">
-								<i class="fas fa-apple-alt"></i>
-								<span data-feather="layers"></span>
-								Cập nhập thức ăn
-							</button>
-						</li>
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('sellCow')">
-								<i class="fas fa-truck-moving"></i>
-								<span data-feather="shopping-cart"></span>
-								Xuất/ bán bò
-							</button>
-						</li>
-						<li class="nav-item">
-							<button class="btn btn-link nav-link text-success" onclick="changePage('sellCow')">
-								<i class="fas fa-briefcase-medical"></i>
-								Theo dõi bệnh
-							</button>
-						</li>
+                            <li><a href="#"onclick="changePage('addCow')">Thêm mới</a></li>
+                            <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">Cập nhật <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onclick="changePage('cowHealth')" >Thêm các thông số</a></li>
+                                    <li><a href="#"onclick="changePage('food')">Bản ghi thức ăn</a></li>
+                                    <li><a href="#"onclick="changePage('vaccine')">Bản ghi tiêm phòng</a></li>
+                                    <li><a href="#"onclick="changePage('cowHealth')">Bản ghi sức khỏe</a></li>
+                                </ul>
+                            </li>
+                            <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown"
+                                    role="button" aria-haspopup="true" aria-expanded="false">Khác<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"onclick="changePage('sellCow')">Xuất chuồng</a></li>
+                                    <li><a href="#"onclick="changePage('die')">Bị chết</a></li>
 
+                                </ul>
+                            </li>
 
-						<br>
-						<li class="nav-item">
-							<!-- <div class="row">
-								<div class="col-2">
-									<img width="10px" style="padding-top:100%" height="auto" src="https://4.bp.blogspot.com/-wtnu5Txw2Ek/WyoYo1OsfjI/AAAAAAAAEPg/c1ZtUzAfAVUYDG0nYH5fGghcOP5qWsZVACLcBGAs/s320/gif-loading91.gif"
-									 alt="Đang đẩy dữ liệu lên blockchain">
-								</div>
-								<div class="col-10">
-									<p class="text-success">sdàdsfsadfads</p>
-								</div>
-							</div> -->
-						</li>
-					</ul>
-				</div>
-			</nav>
-			<div id="router" class="col-md-9 ml-sm-auto col-lg-10">
-				<iframe style="overflow:hidden; 
-					display:block; position: absolute; height: 100%; width: 100%" scrolling="no"
-				 frameborder="0" src="CowComponent/AddCow/addcow.html"></iframe>
-			</div>
-		</div>
-	</div>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right" style="float:right">
+                            <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown"
+                                    role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Thay đổi mật khẩu</a></li>
+                                    <li><a href="#">Thông tin tài khoản</a></li>
+                                </ul>
+                            </li>
+                            <li class=""><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <div id="router" class="row" style="padding-left:17px; padding-top: 0px">
+        
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div id="mainbody">
+        <div style="text-align: center; opacity: 0.8;padding-top: 100px;">
+            <h1>Hệ thống truy xuất nguồn gốc thịt bò</h1>
+            <h4>Nhập dữ liệu vào hệ thống ngay tại đây</h4>
+            <i class="glyphicon glyphicon-arrow-down" style="font-size: 35px;"></i>
+        </div>
+        <div id="selector" style="width: 90%;margin-left: auto; margin-right: auto; padding-top: 100px">
+            <div class="selectorclass" style="float:left">
+                <h2>Thêm bò</h2>
+                <h4>Thêm một con bò mới vào hệ thống</h4>
+                <a href="#" onclick="changePage('addCow')" class="a-selector">Thêm mới</a>
+            </div>
+            <div style="width:9.5%; float:left">
+                <p></p>
+            </div>
+            <div class="selectorclass" style="float:left">
+                <h2>Cân nặng</h2>
+                <h4>Cập nhật thông số con bò theo định kì</h4>
+                <a href="#" onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
+            </div>
+            <div style="width:9.5%; float:left">
+                <p></p>
+            </div>
+            <div class="selectorclass" style="float:left">
+                <h2>Tiêm phòng</h2>
+                <h4>Cập nhật tình trạng tiêm phòng sức khỏe</h4>
+                <a href="#" onclick="changePage('vaccine')"class="a-selector">Cập nhật</a>
+            </div>
+    
+            <div class="selectorclass" style="float:left; margin-top: 50px;">
+                <h2>Thức ăn</h2>
+                <h4>Cập nhật thức ăn của bò theo từng giai đoạn</h4>
+                <a href="#" onclick="changePage('food')"class="a-selector">Cập nhật</a>
+            </div>
+            <div style="width:9.5%; float:left">
+                <p></p>
+            </div>
+            <div class="selectorclass" style="float:left; margin-top: 50px;">
+                <h2>Sức khỏe</h2>
+                <h4>Theo dõi tình trạng sức khỏe của bò</h4>
+                <a href="#"onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
+            </div>
+    
+            <div style="width:9.5%; float:left">
+                <p></p>
+            </div>
+            <div class="selectorclass" style="float:left; margin-top: 50px;">
+                <h2>Xuất chuồng</h2>
+                <h4>Con bò khi xuất chuồng sẽ được ghi lại</h4>
+                <a href="#" onclick="changePage('sellCow')"class="a-selector">Xuất chuồng</a>
+            </div>
+    
+        </div>
+        <br>
+        <br>
+    </div>
 </body>
-
-
-<!-- 3 phần chính : mô tả bài toá
-phân tích thiết kế
-triển khhai cài đặt và kết quả  45 trang , tập trung nhiều vào phần thiết kế và triển khai hệ thống thực
-+_công nghệ lõi, cài đặt lên hệ thống như thế nào-->
-
-<!-- Các tính năng sẽ xây dựng, mô hình cơ sở dữ liệu, thiết kế hệ thống (lớp, layer, kết nối làm việc với nhau như thế nào) -->
+</html>

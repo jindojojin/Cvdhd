@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="./CowComponent/CowStruct.js"></script>
+    <script src="search.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <div class="row" style="padding-left:17px">
+        <div class="col-2">
+        </div>
+        <div class="col-8 input-group-lg">
+            <div class="row">
+                <input id="CowID" type="text" class="form-control-lg col-9" placeholder="Số hiệu của con bò">
+                <div class="input-group-append col-3">
+                    <button style="width:100%" class="btn btn-secondary float-left" type="button" id="search_btn">Tra cứu</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+    <div class="row" style="padding-left:17px">
+        <div id="cow-info" style="background-color:white" class="col">
+            
+        </div>
+        <div id="food-info" class="col">
+
+        </div>
+        <div id="vaccine-info" class="col">
+
+        </div>
+        <div id="sell-info" class="col">
+
+        </div>
+    </div>
+
+</body>
+
+</html>
