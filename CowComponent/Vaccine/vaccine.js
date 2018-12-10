@@ -1,4 +1,4 @@
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
+const myServerUrl = "http://localhost:9000";
 var vaccineInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

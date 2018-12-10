@@ -10,7 +10,7 @@
     _motherGender,//(Mã giống của mẹ) chuỗi <= 30 kí tự (tiếng việt có dấu)
 }*/
 // import { Coursetro } from '../CowStruct.js';
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
+const myServerUrl = "http://localhost:9000";
 var availableFarm = [];
 var availableGender = [];
 var genderInfo = [];

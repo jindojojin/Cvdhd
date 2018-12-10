@@ -5,7 +5,7 @@ const db = require('./Database/database')
 const Cow = require('./Model/CowModel')
 const User = require('./Model/UserModel')
 app.use((req, res, next) => {   // hỗ trợ nhận request post/get chứa cookie dạng json từ client
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST')
     next();
