@@ -17,6 +17,21 @@ var userModel={
         } catch (error) {
             return Promise.reject("");
         }
+    },
+
+
+
+    addTyper:async function(typerInfo){
+        try {
+            let pas = typerInfo.password;
+            typerInfo.password= se.encrypt(pas);
+            typerInfo.type="typer";
+            db.addTyper(typerInfo)
+            .then(r=> Promise.resolve("OK"))
+            .catch(e=>Promise.reject(""))
+        } catch (error) {
+            return Promise.reject("")
+        }
     }
 }
 module.exports=userModel;

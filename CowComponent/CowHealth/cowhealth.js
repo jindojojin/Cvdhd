@@ -1,4 +1,4 @@
-const myServerUrl = "http://localhost:9000";
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var healthInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

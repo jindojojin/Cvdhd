@@ -4,8 +4,9 @@ const app = express();
 const db = require('./Database/database')
 const Cow = require('./Model/CowModel')
 const User = require('./Model/UserModel')
+const se = require('./secure1')
 app.use((req, res, next) => {   // hỗ trợ nhận request post/get chứa cookie dạng json từ client
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
+    res.setHeader('Access-Control-Allow-Origin', 'https://cvdhd-serverdb.herokuapp.com');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST')
     next();
@@ -137,6 +138,33 @@ app.post('/addLog', jsonread.json(), (req, res) => {
         res.send();
     });
 });
+
+app.post('/addTyper', jsonread.json(), (req, res) => {
+    console.log(req.body);
+    try {
+        User.addTyper(req.body).then(r => {
+            console.log("đã thêm user");
+            res.statusCode = 201;
+            res.send(JSON.stringify(r)); 
+        }).catch(e => {
+            res.statusCode = 401;
+            res.send();
+        });
+    } catch (error) {
+        
+    }
+});
+app.get('/getTyper/:token',(req,res)=>{
+    
+    db.getAllTyper().then(r => {
+        console.log("đã lấy danh sách user");
+        res.statusCode = 201;
+        res.send(JSON.stringify(r)); 
+    }).catch(e => {
+        res.statusCode = 401;
+        res.send();
+    });
+})
 
 
 app.listen(process.env.PORT || 9000, () => {

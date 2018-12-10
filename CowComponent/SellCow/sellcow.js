@@ -1,4 +1,4 @@
-const myServerUrl = "http://localhost:9000";
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var sellInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

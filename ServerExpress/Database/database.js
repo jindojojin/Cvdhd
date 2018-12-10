@@ -2,16 +2,11 @@ var mongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://server:NSzE8QWym39iQTL@ds041347.mlab.com:41347/cvdhd';
 var ObjectId = require('mongodb').ObjectID;
 var dbmodel = {
-    addVerify: async function (username,password,AccountsInfo) {
+    addTyper: async function (AccountsInfo) {
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
         try {
             let verify = await db.collection('Accounts').insertOne(AccountsInfo);
-            await db.collection('Accounts').insertOne({
-                "username": username,
-                "password": password,
-                "type": "verify"
-            })
             return Promise.resolve(verify.insertedId);
         } catch (error) {
             return Promise.reject(error);
@@ -141,7 +136,20 @@ var dbmodel = {
         } finally {
             client.close();
         }
-    }
+    },
+
+    getAllTyper:async function (){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            let list = await db.collection('Account').find({type:"typer"});
+            return Promise.resolve(list);
+        } catch (error) {
+            return Promise.reject("");
+        } finally {
+            client.close();
+        }
+    },
 
 
 }

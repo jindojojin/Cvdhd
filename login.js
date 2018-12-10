@@ -1,4 +1,4 @@
-const myServerUrl = "http://localhost:9000";
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 $(document).ready(function () {
     $("#login_btn").click(function () {
         if(validateUser()){
@@ -29,6 +29,7 @@ function login(u,p){
         error: function (res) {
             console.log(res);
             $("#CowInfoForm").show();
+            window.alert("Tên đăng nhập hoặc mật khẩu không đúng hoặc server đang không hoat động")
         }
     });
 }
