@@ -102,6 +102,8 @@ function getDieInfo(id) {
         }
     });
 }
+
+
 function getFoodInfo(id) {
     type = 4;
     Coursetro.findID(id, type, (err, res) => {
@@ -113,7 +115,8 @@ function getFoodInfo(id) {
                     if (data) {
                         console.log("food"+data);
                         var x= JSON.parse(data[1]);
-                        $("#sell-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")                        
+                        $("#food-info").append("<tr><th scope='row'>"
+                        +x['_cowFood']+"</th><td>"+x['_cowHeft']+"</td><td>"+x._checkDay+"</td></tr>")
                     }
                 });
             });

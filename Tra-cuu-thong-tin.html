@@ -21,9 +21,9 @@
     <br>
     <br>
     <div class="row" style="padding-left:17px">
-        <div class="col-2">
+        <div class="col-1">
         </div>
-        <div class="col-8 input-group-lg">
+        <div class="col-10 input-group-lg">
             <div class="row">
                 <input id="CowID" type="text" class="form-control-lg col-9" placeholder="Số hiệu của con bò">
                 <div class="input-group-append col-3">
@@ -32,11 +32,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
         </div>
     </div>
     <div style="padding-left:17px">
-        <div style="background-color:white; width: 65%; border-radius: 10px" class="container">
+        <div style="background-color:white; width: 80%; border-radius: 10px" class="container">
             <div class="order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center my-3">
                     <span class="text-muted">Thông tin cơ bản</span>
@@ -46,7 +46,7 @@
             </div>
             <br>
         </div>
-        <div style="background-color:white; width: 65%; border-radius: 10px" class="container">
+        <div style="background-color:white; width: 80%; border-radius: 10px" class="container">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Chế độ dinh dưỡng</span>
             </h4>
@@ -55,8 +55,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Thức ăn</th>
-                                    <th scope="col">Khối lượng( kg)</th>
-                                    <th scope="col">Sử dụng lúc ( tháng tuổi)</th>
+                                    <th scope="col">Khối lượng ăn mỗi ngày( kg)</th>
                                     <th scope="col">Ngày bắt đầu sử dụng</th>
                                 </tr>
                             </thead>
@@ -64,31 +63,45 @@
                         </table>
             </ul>
         </div>
-        <div style="background-color:white; width: 65%; border-radius: 10px" class="container">
+        <div style="background-color:white; width: 80%; border-radius: 10px" class="container">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Hồ sơ sức khỏe</span>
+                <span class="text-muted">Nhật ký sử dụng thuốc thú y</span>
             </h4>
             <div id="vaccine-info" class="row container">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Ngày kiểm tra</th>
-                            <th scope="col">Chiều cao</th>
-                            <th scope="col">Cân nặng</th>
-                            <th scope="col">Chiều dài</th>
+                            <th scope="col">Ngày sử dụng </th>
+                            <th scope="col">Tên thuốc</th>
+                            <th scope="col">Liều lượng</th>
+                            <th scope="col">Lý do sử dụng</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
+                    <tbody id="vaccine-info">
+                        </tbody>
                 </table>
             </div>
         </div>
-        <div style="background-color:white; width: 65%; border-radius: 10px" class="container">
+        <div style="background-color:white; width: 80%; border-radius: 10px" class="container">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Tiền sử bệnh</span>
+                </h4>
+                <div  class="row container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ngày phát hiện</th>
+                                <th scope="col">Triệu chứng bên ngoài</th>
+                                <th scope="col">Kết quả chuẩn đoán</th>
+                                <th scope="col">Phương án chữa trị</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sick-info">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        <div style="background-color:white; width: 80%; border-radius: 10px" class="container">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Quá trình sinh trưởng</span>
             </h4>

@@ -1,5 +1,6 @@
 const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 $(document).ready(function () {
+    $("#login").hide();
     if (getCookie("name") != null) {
         document.getElementById("user").innerHTML = getCookie("name") + "<span class='caret'></span>";
         $("#logout").text('Đăng xuất');
@@ -103,6 +104,13 @@ function changePage(a) {
         $('#mainbody').hide();
         $('#router').show();
         router.innerHTML = '<iframe style="overflow:hidden;display:block; position: absolute; height: 100%; width: 100%" frameborder="0" src="CowComponent/SellCow/sellcow.html"></iframe>';
+        return;
+    }
+    if (a == 'cowSick') {
+        var router = document.getElementById("router");
+        $('#mainbody').hide();
+        $('#router').show();
+        router.innerHTML = '<iframe style="overflow:hidden;display:block; position: absolute; height: 100%; width: 100%" frameborder="0" src="CowComponent/Sick/sick.html"></iframe>';
         return;
     }
 }

@@ -1,21 +1,20 @@
 const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
-var foodInfo = {};
+var vaccineInfo = {};
 $(document).ready(function () {
     $("#loader").hide();
     $("#spiner").hide();
     $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực
-        getCowFoodInfo();
+        getCowVaccineInfo();
         pushDataToSerVer();
     });
     $("#pushToChain_btn").click(function () {
-        console.log(foodInfo);
-        if (foodInfo._cowID != "") {
+        if (vaccineInfo._cowID != "") {
             $("#spiner").show();
-            let id = foodInfo._cowID;
+            let id = vaccineInfo._cowID;
             console.log("called to pushToBlockChain");
-            let blockchainData = JSON.stringify(foodInfo);
-            //4 la kieu bản ghi thức ăn
-            let type = 4;
+            let blockchainData = JSON.stringify(vaccineInfo);
+            //6 la kieu bản ghi sick
+            let type = 7;
             pushDataToBlockchain(id, blockchainData, type);
         }
     });
@@ -60,12 +59,12 @@ function caculateAge(){
     //Get 1 day in milliseconds
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24*30));
 }
-function getCowFoodInfo() {
-    let x = $("#CowFoodInfoForm").serializeArray();
+function getCowVaccineInfo() {
+    let x = $("#CowVaccineInfoForm").serializeArray();
     x.forEach(element => {
-        foodInfo[element.name] = element.value;
+        vaccineInfo[element.name] = element.value;
     });
-    console.log(foodInfo);
+    console.log(vaccineInfo);
 }
 function validateInfo() {
     return true;
@@ -75,26 +74,26 @@ function pushDataToSerVer() {
         return;
     }
     $("#loader").show();
-    $("#CowFoodInfoForm").hide();
+    $("#CowVaccineInfoForm").hide();
     $.ajax({
-        url: myServerUrl + "/addFood",
+        url: myServerUrl + "/addVaccine",
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(foodInfo),
+        data: JSON.stringify(vaccineInfo),
         dataType: 'json',
         success: function (res) {
             // cowInfo._id = data._id; // lấy id do server trả về và đẩy dữ liệu lên blockchain
             if (res.status != "OK") {
                 window.alert("Dữ liệu chưa được kiểm tra thành công, bạn không thể đẩy thông tin lên blockchain")
             }
-            cowID = foodInfo._cowID;
-            blockchainData = JSON.stringify(foodInfo);
+            cowID = vaccineInfo._cowID;
+            blockchainData = JSON.stringify(vaccineInfo);
             $("#dataBlockchain").text(blockchainData);
             $("#CowID").text(cowID);
             $("#showModal").click(); // hiển thị dialog cho phép đẩy dữ liệu lên blockchain;
             $("#closeChainModal").show();
             $("#pushToChain_btn").show();
-            $("#CowFoodInfoForm").show();
+            $("#CowVaccineInfoForm").show();
             $("#loader").hide();
             // b = data;
         },
