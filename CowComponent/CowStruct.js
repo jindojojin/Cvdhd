@@ -5,7 +5,7 @@ if (typeof web3 !== 'undefined') {
     // set the provider you want from Web3.providers
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
-
+const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 web3.eth.defaultAccount = web3.eth.accounts[0];
 const CoursetroContract = web3.eth.contract(
 	[
@@ -155,6 +155,7 @@ function pushDataToBlockchain(id, data, typeOfData) {
             $("#closeModal").click();
         }
         else {
+			console.log("ressssss")
             console.log(res);
             web3.eth.getBalance('0xcdb16d92dd1d4f279cad945f200793107d3ec89f', function (error, result) {
                 if (!error) {
@@ -162,8 +163,55 @@ function pushDataToBlockchain(id, data, typeOfData) {
                     $("#balance").html('Balance: ' + balance);
                 }
                 console.log("Da day len tren, lay du lieu ve");
-            })
+			})
+			sendLogToSerVer(typeOfData,res);
 
         }
     });
+}
+
+DICTLOG= new Map([
+	[1,'đã thêm một con bò mới vào hệ thống và đẩy thông tin lên blockchain'],
+	[2,'đã đẩy một bản ghi theo dõi sức khỏe lên blockchain'],
+	[3,'đã đẩy một bản ghi báo cáo bò bị chết lên blockchain '],
+	[4,'đã đẩy một bản ghi chế độ dinh dưỡng lên blockchain'],
+	[5,'đã đẩy một bản ghi về thông tin xuất chuồng'],
+	[6,'đã đẩy một bản ghi về việc sử dụng thuốc thú y'],
+	[7,'đã đẩy một bản ghi về lịch sử bệnh của bò']
+])
+function sendLogToSerVer(typeOfLog,transaction){
+	let log={};
+	log.content="Người nhập liệu "+ getCookie("name")+" "+DICTLOG.get(typeOfLog);
+	log.transaction_hash=transaction
+	console.log(log);
+	$.ajax({
+        url: myServerUrl + "/addLog",
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(log),
+        dataType: 'json',
+        success: function (res) {
+            // cowInfo._id = data._id; // lấy id do server trả về và đẩy dữ liệu lên blockchain
+            console.log("Đẩy log thành công");
+        },
+        error: function (error) {
+            console.log("thaat bai")
+            console.log(error);
+            $("#loader").hide();
+            $("#CowInfoForm").show();
+        }
+    });
+}
+
+function getCookie(name) {
+	const nameLenPlus = (name.length + 1);
+	return document.cookie
+		.split(';')
+		.map(c => c.trim())
+		.filter(cookie => {
+			return cookie.substring(0, nameLenPlus) === `${name}=`;
+		})
+		.map(cookie => {
+			return decodeURIComponent(cookie.substring(nameLenPlus));
+		})[0] || null;
 }
