@@ -4,7 +4,6 @@ const app = express();
 const db = require('./Database/database')
 const Cow = require('./Model/CowModel')
 const User = require('./Model/UserModel')
-const se = require('./secure1')
 app.use((req, res, next) => {   // hỗ trợ nhận request post/get chứa cookie dạng json từ client
     res.setHeader('Access-Control-Allow-Origin', 'https://cvdhd-serverdb.herokuapp.com');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
@@ -138,12 +137,39 @@ app.post('/addLog', jsonread.json(), (req, res) => {
         res.send();
     });
 });
-
+app.get('/getLog/:token',(req,res)=>{
+    db.getLog().then(r => {
+        console.log("đã lấy danh sách log");
+        res.statusCode = 200;
+        // console.log(r);
+        res.send(JSON.stringify(r)); 
+    }).catch(e => {
+        res.statusCode = 401;
+        res.send();
+    });
+})
 app.post('/addTyper', jsonread.json(), (req, res) => {
     console.log(req.body);
     try {
+        delete req.body['adminToken'];
         User.addTyper(req.body).then(r => {
             console.log("đã thêm user");
+            res.statusCode = 201;
+            res.send(JSON.stringify(r)); 
+        }).catch(e => {
+            res.statusCode = 401;
+            res.send();
+        });
+    } catch (error) {
+        
+    }
+});
+app.post('/addFarm', jsonread.json(), (req, res) => {
+    console.log(req.body);
+    try {
+        delete req.body['adminToken'];
+        db.addFarm(req.body).then(r => {
+            console.log("đã thêm farm");
             res.statusCode = 201;
             res.send(JSON.stringify(r)); 
         }).catch(e => {
@@ -159,6 +185,18 @@ app.get('/getTyper/:token',(req,res)=>{
     db.getAllTyper().then(r => {
         console.log("đã lấy danh sách user");
         res.statusCode = 201;
+        // console.log(r);
+        res.send(JSON.stringify(r)); 
+    }).catch(e => {
+        res.statusCode = 401;
+        res.send();
+    });
+});
+app.get('/farmInfo/:farmCode',(req,res)=>{
+    db.getFarmInfo(req.params.farmCode).then(r => {
+        console.log("đã lấy thông tin trang trại");
+        res.statusCode = 201;
+        // console.log(r);
         res.send(JSON.stringify(r)); 
     }).catch(e => {
         res.statusCode = 401;

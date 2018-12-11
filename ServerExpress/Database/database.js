@@ -137,12 +137,41 @@ var dbmodel = {
             client.close();
         }
     },
-
     getAllTyper:async function (){
         let client = await mongoClient.connect(url, { useNewUrlParser: true });
         let db = client.db('cvdhd');
         try {
-            let list = await db.collection('Account').find({type:"typer"});
+            let list = await db.collection('Accounts').find({type:"typer"}).toArray();
+            // console.log(list);
+            list.forEach(element => {
+                delete element['password'];
+            });
+            return Promise.resolve(list);
+        } catch (error) {
+            return Promise.reject("");
+        } finally {
+            client.close();
+        }
+    },
+    getFarmInfo:async function (farmCode){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            let list = await db.collection('Farm').findOne({_farmCode:farmCode});
+            // console.log(list);
+            return Promise.resolve(list);
+        } catch (error) {
+            return Promise.reject("");
+        } finally {
+            client.close();
+        }
+    },
+    getLog:async function (farmCode){
+        let client = await mongoClient.connect(url, { useNewUrlParser: true });
+        let db = client.db('cvdhd');
+        try {
+            let list = await db.collection('Log').find({}).limit(20).toArray();
+            // console.log(list);
             return Promise.resolve(list);
         } catch (error) {
             return Promise.reject("");
@@ -167,5 +196,5 @@ var dbmodel = {
 //     _ownerName:"Trần Văn A",
 //     _ownerCode:"132000342"
 // }).then(r=>console.log(r));
-
+// dbmodel.getLog().then(r=>console.log(r)).catch(e=>console.log(e));
 module.exports = dbmodel;

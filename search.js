@@ -23,9 +23,10 @@ function getCowInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
-                        // console.log(data);
+                        console.log("info"+data);
                         var x= JSON.parse(data[1]);
-                        $("#cow-info").text(data);
+                        $("#cow-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")
+
                     }
                 });
             });
@@ -42,8 +43,9 @@ function getHealthInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        console.log("health"+data)
                         var x= JSON.parse(data[1]);
-                        $("#health-info").text(data);
+                        $("#health-info").append("<p>adfadfadâdfadfa</p>")
                     }
                 });
             });
@@ -59,8 +61,10 @@ function getDieInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        console.log("die"+data);
+                        
                         var x= JSON.parse(data[1]);
-                        $("#die-info").text(data);
+                        $("#die-info").append("<p>adfadfadâdfadfa</p>")
                     }
                 });
             });
@@ -76,8 +80,9 @@ function getFoodInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        console.log("food"+data);
                         var x= JSON.parse(data[1]);
-                        $("#food-info").text(data);
+                        $("#food-info").append("<p>adfadfadâdfadfa</p>")
                     }
                 });
             });
@@ -93,11 +98,12 @@ function getSellInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        console.log("sell"+data);
                         var x= JSON.parse(data[1]);
-                        $("#sell-info").text(data);
+                        $("#sell-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")
                     }
                 });
-            });
+            });F
         }
     });
 }
@@ -111,8 +117,10 @@ function getVaccineInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        console.log("vaccine"+data);
+
                         var x= JSON.parse(data[1]);
-                        $("#vaccine-info").text(data);
+                        $("#vaccine-info").append("<p>adfadfadâdfadfa</p>")
                     }
                 });
             });
