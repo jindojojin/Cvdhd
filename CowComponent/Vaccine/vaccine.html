@@ -175,11 +175,11 @@ h4{
                 <div class="container" style="border:solid 1px;padding-top:10px ; border-radius:4px; border-color: #8999A8; width: 100%">
                     <div class="form-group">
                         <label>Ngày bắt đầu sử dụng</label>
-                        <input id="_checkDay" name="_startDay" class="form-control" type="date">
+                        <input id="_startDay" name="_startDay" class="form-control" type="date">
                     </div>
                     <div class="form-group">
                             <label>Kết thúc sử dụng vào ngày</label>
-                            <input  name="_endDay" class="form-control" type="date">
+                            <input id="_endDay" name="_endDay" class="form-control" type="date">
                         </div>
                     <div class="form-group">
                         <label>Tên người phụ trách</label>
@@ -187,15 +187,15 @@ h4{
                     </div>
                     <div class="form-group">
                         <label>Tên thuốc</label>
-                        <input id="_cowWeight" name="_vaccineName" class="form-control" type="text">
+                        <input id="_vaccineName" name="_vaccineName" class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Liều lượng sử dụng</label>
-                        <input id="_cowHeight" name="_vaccineUsed" class="form-control" type="text">
+                        <input id="_vaccineUsed" name="_vaccineUsed" class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label>Lý do sử dụng</label>
-                        <input id="_cowWidth" name="_causeOfUse" class="form-control" type="text">
+                        <input id="_causeOfUse" name="_causeOfUse" class="form-control" type="text">
                     </div>
                     
                 </div>
@@ -210,7 +210,7 @@ h4{
 <!-- //modalChain -->
 <button id="showModal" hidden data-toggle="modal" data-target="#blockchainModal"></button>
 <div class="modal fade" id="blockchainModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" style="padding-top: 100px">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Dữ liệu đã xác thực, đẩy thông tin lên BlockChain?</h5>

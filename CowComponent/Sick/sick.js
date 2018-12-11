@@ -63,10 +63,49 @@ function getCowVaccineInfo() {
     x.forEach(element => {
         vaccineInfo[element.name] = element.value;
     });
+    return vaccineInfo;
     console.log(vaccineInfo);
 }
 function validateInfo() {
-    return true;
+   $('#_cowID').css('border-color', '');
+    $('#_checkDay').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_cowWeight').css('border-color', '');
+    $('#_cowSymptom').css('border-color', '');
+    $('#_cowSickness').css('border-color', '');
+    $('#_cowEvaluation').css('border-color', '');
+    var res = true;
+    let cowInfo = getCowVaccineInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkDay== "") {
+        $('#_checkDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowWeight== "") {
+        $('#_cowWeight').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowSymptom== "") {
+        $('#_cowSymptom').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowSickness== "") {
+        $('#_cowSickness').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowEvaluation== "") {
+        $('#_cowEvaluation').css('border-color', 'red');
+        res= false;
+    }
+    return res;
 }
 function pushDataToSerVer() {
     if (!validateInfo()) {

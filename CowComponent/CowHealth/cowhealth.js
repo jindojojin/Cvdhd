@@ -3,8 +3,11 @@ $(document).ready(function () {
     $("#loader").hide();
     $("#spiner").hide();
     $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực và tạo id cho bò
+        if(validateCowInfo()){
+        
         getCowHealthInfo();
         pushDataToSerVer();
+    }
     });
     $("#pushToChain_btn").click(function () {
         if (healthInfo._cowID != "") {
@@ -64,10 +67,44 @@ function getCowHealthInfo() {
     x.forEach(element => {
         healthInfo[element.name] = element.value;
     });
+    return healthInfo;
     console.log(healthInfo);
 }
 function validateCowInfo() {
-    return true;
+    $('#_cowID').css('border-color', '');
+    $('#_checkDay').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_cowHeight').css('border-color', '');
+    $('#_cowWidth').css('border-color', '');
+    $('#_cowWeight').css('border-color', '');
+    var res = true;
+    let cowInfo = getCowHealthInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkDay== "") {
+        $('#_checkDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowHeight== "") {
+        $('#_cowHeight').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowWidth== "") {
+        $('#_cowWidth').css('border-color', 'red');
+        res= false;
+    }
+     if(cowInfo._cowWeight== "") {
+        $('#_cowWeight').css('border-color', 'red');
+        res= false;
+    }
+    return res;
 }
 function pushDataToSerVer() {
     $("#loader").show();

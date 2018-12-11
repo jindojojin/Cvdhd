@@ -3,8 +3,10 @@ $(document).ready(function () {
     $("#loader").hide();
     $("#spiner").hide();
     $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực
+        if(validateInfo()){
         getCowFoodInfo();
         pushDataToSerVer();
+    }
     });
     $("#pushToChain_btn").click(function () {
         console.log(foodInfo);
@@ -64,10 +66,40 @@ function getCowFoodInfo() {
     x.forEach(element => {
         foodInfo[element.name] = element.value;
     });
+    return foodInfo;
     console.log(foodInfo);
 }
 function validateInfo() {
-    return true;
+    $('#_cowID').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_cowFood').css('border-color', '');
+    $('#_cowHeft').css('border-color', '');
+    $('#_checkDay').css('border-color', '');
+    
+    var res = true;
+    let cowInfo = getCowFoodInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowFood== "") {
+        $('#_cowFood').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowHeft== "") {
+        $('#_cowHeft').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkDay== "") {
+        $('#_checkDay').css('border-color', 'red');
+        res= false;
+    }
+    return res;
 }
 function pushDataToSerVer() {
     if (!validateInfo()) {
