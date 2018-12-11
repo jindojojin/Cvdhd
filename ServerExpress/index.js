@@ -128,7 +128,7 @@ app.post('/addSell', jsonread.json(), (req, res) => {
 });
 app.post('/addLog', jsonread.json(), (req, res) => {
     console.log(req.body);
-    db.addLog(req.body.log,req.body.transaction_hash).then(r => {
+    db.addLog(req.body.content,req.body.transaction_hash).then(r => {
         console.log("đã cập nhập log");
         res.statusCode = 201;
         res.send(JSON.stringify({"status":"OK"})); 
@@ -141,6 +141,7 @@ app.get('/getLog/:token',(req,res)=>{
     db.getLog().then(r => {
         console.log("đã lấy danh sách log");
         res.statusCode = 200;
+        
         // console.log(r);
         res.send(JSON.stringify(r)); 
     }).catch(e => {

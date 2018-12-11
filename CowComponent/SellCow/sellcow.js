@@ -1,4 +1,3 @@
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var sellInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

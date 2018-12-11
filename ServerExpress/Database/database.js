@@ -172,8 +172,12 @@ var dbmodel = {
         try {
             let list = await db.collection('Log').find({}).limit(20).toArray();
             // console.log(list);
+            list.forEach(element => {
+                element.time=ObjectId(element._id).getTimestamp();  
+              });
             return Promise.resolve(list);
         } catch (error) {
+            console.log(error);
             return Promise.reject("");
         } finally {
             client.close();

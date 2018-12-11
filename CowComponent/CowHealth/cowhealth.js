@@ -1,4 +1,3 @@
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var healthInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

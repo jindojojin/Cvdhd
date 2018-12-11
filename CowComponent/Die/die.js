@@ -1,4 +1,3 @@
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var dieInfo = {};
 $(document).ready(function () {
     $("#loader").hide();

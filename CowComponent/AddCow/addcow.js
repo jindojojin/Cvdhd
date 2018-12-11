@@ -10,7 +10,6 @@
     _motherGender,//(Mã giống của mẹ) chuỗi <= 30 kí tự (tiếng việt có dấu)
 }*/
 // import { Coursetro } from '../CowStruct.js';
-const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 var availableFarm = [];
 var availableGender = [];
 var genderInfo = [];
@@ -229,6 +228,7 @@ function makeGenderSuggestion() {
 returnEvent.watch(function (error, result) {
     if (result) {
         $("#loader").hide();
+        console.log(result);
         // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
         message="";
         
