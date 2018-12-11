@@ -13,7 +13,24 @@ $(document).ready(function () {
         getSellInfo(id);
     })
 })
-
+var DICT= new Map([
+    ['_id','Số hiệu'],
+    ['_gender','Mã giống'],
+    ['_sex','Giới tính'],
+    ["_farmID",'Trang trại'],
+    ['_birthday','Ngày sinh'],
+    ['_birthplace','Nơi sinh'],
+    ['_fatherID','Số hiệu bò bố'],
+    ['_motherID','Số hiệu bò mẹ'],
+    ['_fatherGender','Mã giống bò bố'],
+    ['_motherGender','Mã giống bò mẹ'],
+    ['1','Đực'],
+    ['0', 'Cái']
+])
+function convertKey(key){ // ánh xạ key sang mảng thông tin
+    let x= DICT.get(key)
+    return (x != undefined)? x:key;
+}
 function getCowInfo(id) {
     type = 1;//kieu du CowInfo
     Coursetro.findID(id, type, (err, res) => {
@@ -23,9 +40,19 @@ function getCowInfo(id) {
                 console.log(element.c[0]);
                 Coursetro.getInfoAt(element.c[0], (err, data) => {
                     if (data) {
+                        $('#cow-info').html="";
                         console.log("info"+data);
                         var x= JSON.parse(data[1]);
-                        $("#cow-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")
+                        let arr= Object.keys(x).map(function (index){
+                            return{key:index,value:x[index]};
+                        })
+                        console.log(arr);
+                        arr.forEach(element => {
+                            $("#cow-info")
+                            .append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"
+                            +convertKey(element.key)+": " +convertKey(element.value)+
+                            "</h6><small class='text-muted'>")
+                        });
 
                     }
                 });
@@ -45,7 +72,11 @@ function getHealthInfo(id) {
                     if (data) {
                         console.log("health"+data)
                         var x= JSON.parse(data[1]);
-                        $("#health-info").append("<p>adfadfadâdfadfa</p>")
+                        // $("#health-info").append("adsdsdsdsàdsà")
+                        $("#health-info").append("<tr><th scope='row'>"
+                        +x['_checkDay']+"</th><td>"+x._cowHeight+"</td><td>"
+                        +x._cowWeight+"</td><td>"+x._cowWidth+"</td></tr>")
+                        // console.log(x._cowHeight);
                     }
                 });
             });
@@ -82,7 +113,7 @@ function getFoodInfo(id) {
                     if (data) {
                         console.log("food"+data);
                         var x= JSON.parse(data[1]);
-                        $("#food-info").append("<p>adfadfadâdfadfa</p>")
+                        $("#sell-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")                        
                     }
                 });
             });
@@ -103,7 +134,7 @@ function getSellInfo(id) {
                         $("#sell-info").append("<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>"+"</h6><small class='text-muted'>Brief description</small></div><span class='text-muted'>$12</span></li>")
                     }
                 });
-            });F
+            });
         }
     });
 }

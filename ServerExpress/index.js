@@ -152,6 +152,7 @@ app.post('/addTyper', jsonread.json(), (req, res) => {
     console.log(req.body);
     try {
         delete req.body['adminToken'];
+        delete req.body['repassword'];
         User.addTyper(req.body).then(r => {
             console.log("đã thêm user");
             res.statusCode = 201;
