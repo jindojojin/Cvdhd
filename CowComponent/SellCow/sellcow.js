@@ -3,8 +3,10 @@ $(document).ready(function () {
     $("#loader").hide();
     $("#spiner").hide();
     $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực
+        if(validateInfo()){
         getCowSellInfo();
         pushDataToSerVer();
+    }
     });
     $("#pushToChain_btn").click(function () {
         if (sellInfo._cowID != "") {
@@ -63,10 +65,54 @@ function getCowSellInfo() {
     x.forEach(element => {
         sellInfo[element.name] = element.value;
     });
+    return sellInfo
     console.log(sellInfo);
 }
 function validateInfo() {
-    return true;
+    $('#_cowID').css('border-color', '');
+    $('#_checkDay').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_cowWeight').css('border-color', '');
+    $('#_cowHeight').css('border-color', '');
+    $('#_cowWidth').css('border-color', '');
+    $('#_cowSell').css('border-color', '');
+    $('#_cowReason').css('border-color', '');
+    var res = true;
+    let cowInfo = getCowSellInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkDay== "") {
+        $('#_checkDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowWeight== "") {
+        $('#_cowWeight').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowHeight== "") {
+        $('#_cowHeight').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowWidth== "") {
+        $('#_cowWidth').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowSell== "") {
+        $('#_cowSell').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowReason== "") {
+        $('#_cowReason').css('border-color', 'red');
+        res= false;
+    }
+    return res;
 }
 function pushDataToSerVer() {
     if (!validateInfo()) {

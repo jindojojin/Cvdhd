@@ -63,10 +63,36 @@ function getCowDieInfo() {
     x.forEach(element => {
         dieInfo[element.name] = element.value;
     });
+    return dieInfo;
     console.log(dieInfo);
 }
 function validateInfo() {
-    return true;
+    $('#_cowID').css('border-color', '');
+    $('#_checkDay').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_cowDieReason').css('border-color', '');
+    
+    var res = true;
+    let cowInfo = getCowDieInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkDay== "") {
+        $('#_checkDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._cowDieReason== "") {
+        $('#_cowDieReason').css('border-color', 'red');
+        res= false;
+    }
+    
+    return res;
 }
 function pushDataToSerVer() {
     if (!validateInfo()) {

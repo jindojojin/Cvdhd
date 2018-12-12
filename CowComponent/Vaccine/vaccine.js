@@ -3,8 +3,10 @@ $(document).ready(function () {
     $("#loader").hide();
     $("#spiner").hide();
     $("#submit_btn").click(function () {  /// khi bấm nút đẩy dữ liệu -> gửi dữ liệu cho server xác thực
+        if(validateInfo()){
         getCowVaccineInfo();
         pushDataToSerVer();
+    }
     });
     $("#pushToChain_btn").click(function () {
         if (vaccineInfo._cowID != "") {
@@ -63,10 +65,71 @@ function getCowVaccineInfo() {
     x.forEach(element => {
         vaccineInfo[element.name] = element.value;
     });
+    return vaccineInfo;
     console.log(vaccineInfo);
 }
 function validateInfo() {
-    return true;
+    $('#_cowID').css('border-color', '');
+    $('#_startDay').css('border-color', '');
+    $('#_endDay').css('border-color', '');
+    $('#_checkerName').css('border-color', '');
+    $('#_vaccineName').css('border-color', '');
+    $('#_vaccineUsed').css('border-color', '');
+    $('#_causeOfUse').css('border-color', '');
+    var res = true;
+    let cowInfo = getCowVaccineInfo();
+    
+    if(cowInfo._cowID=="") {
+        $('#_cowID').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._startDay== "") {
+        $('#_startDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._endDay== "") {
+        $('#_endDay').css('border-color', 'red');
+        res= false;
+    }
+    if(cowInfo._checkerName== "") {
+        $('#_checkerName').css('border-color', 'red');
+        res= false;
+    }
+    for(var i=0; i< cowInfo._checkerName.length; i++){
+    	if((cowInfo._checkerName.charCodeAt(i)>=33 && cowInfo._checkerName.charCodeAt(i)<= 64 ) ||(cowInfo._checkerName.charCodeAt(i)>= 91 && cowInfo._checkerName.charCodeAt(i)<=96 )
+    		|| (cowInfo._checkerName.charCodeAt(i) >=123 && cowInfo._checkerName.charCodeAt(i) <=126) ){
+    		console.log(cowInfo._checkerName.charCodeAt(i));
+    		$('#_checkerName').css('border-color', 'red');
+    		res= false;
+    	}
+    }
+    if(cowInfo._vaccineName== "") {
+        $('#_vaccineName').css('border-color', 'red');
+        res= false;
+    }
+    
+     if(cowInfo._vaccineUsed== "") {
+        $('#_vaccineUsed').css('border-color', 'red');
+        res= false;
+    }
+    for(var i=0; i< cowInfo._vaccineUsed.length; i++){
+    	if(cowInfo._vaccineUsed.charCodeAt(i)==44||cowInfo._vaccineUsed.charCodeAt(i)==46 ||(cowInfo._vaccineUsed.charCodeAt(i)<=57&&cowInfo._vaccineUsed.charCodeAt(i)>=48)){
+    		
+    	}
+    	else {
+    		
+    		$('#_vaccineUsed').css('border-color', 'red');
+    		res= false;
+
+
+    	} 
+    }
+    if(cowInfo._causeOfUse== "") {
+        $('#_causeOfUse').css('border-color', 'red');
+        res= false;
+    }
+    
+    return res;
 }
 function pushDataToSerVer() {
     if (!validateInfo()) {
