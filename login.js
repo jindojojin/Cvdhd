@@ -24,7 +24,7 @@ function login(u,p){
             console.log(data);
             setCookie("name", data.name, 1);
             setCookie("tk", data.token, 1);
-            window.location.replace("http://192.168.100.23:3000"); 
+            window.location.replace("http://localhost:3000"); 
         },
         error: function (res) {
             console.log(res);

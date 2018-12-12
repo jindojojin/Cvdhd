@@ -1,13 +1,16 @@
 const myServerUrl = "https://cvdhd-serverdb.herokuapp.com";
 $(document).ready(function () {
     $("#login").hide();
+    $("#navbar").hide();
     if (getCookie("name") != null) {
         document.getElementById("user").innerHTML = getCookie("name") + "<span class='caret'></span>";
         $("#logout").text('Đăng xuất');
         $("#mainbody").show();
+        $("#navbar").show();
         $("#login").hide();
     } else {
         $("#mainbody").hide();
+        $("#navbar").hide();
         $("#login").show();
         $("#logout").text('Đăng nhập');
     }
@@ -15,6 +18,7 @@ $(document).ready(function () {
         if (getCookie("name") != null) {
             deleteAllCookies();
             $("#mainbody").hide();
+            $("#navbar").hide();
             $("#login").show();
             $("#logout").text('Đăng nhập');
             window.location.reload();
@@ -47,7 +51,7 @@ function login(u, p) {
             console.log(data);
             setCookie("name", data.name, 1);
             setCookie("tk", data.token, 1);
-            window.location.replace("http://192.168.100.23:3000");
+            window.location.replace("http://localhost:3000");
         },
         error: function (res) {
             console.log(res);
@@ -115,14 +119,14 @@ function changePage(a) {
     }
 }
 function getCookie(name) {
-	const nameLenPlus = (name.length + 1);
-	return document.cookie
-		.split(';')
-		.map(c => c.trim())
-		.filter(cookie => {
-			return cookie.substring(0, nameLenPlus) === `${name}=`;
-		})
-		.map(cookie => {
-			return decodeURIComponent(cookie.substring(nameLenPlus));
-		})[0] || null;
+    const nameLenPlus = (name.length + 1);
+    return document.cookie
+        .split(';')
+        .map(c => c.trim())
+        .filter(cookie => {
+            return cookie.substring(0, nameLenPlus) === `${name}=`;
+        })
+        .map(cookie => {
+            return decodeURIComponent(cookie.substring(nameLenPlus));
+        })[0] || null;
 }

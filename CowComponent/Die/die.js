@@ -105,3 +105,15 @@ function pushDataToSerVer() {
         }
     });
 }
+
+returnEvent.watch(function (error, result) {
+    if (result) {
+        $("#spiner").hide();
+        $("#loader").hide();
+        // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
+        console.log(result.args);
+        $("#closeChainModal").click();
+    } else {
+        $("#loader").hide();
+    }
+});

@@ -15,8 +15,8 @@
     <div class="navbar-wrapper">
         <div class="container-fluid">
             <nav class="navbar navbar-fixed-top" style="background: #8999A8;">
-                <a class="navbar-brand" href="#" onclick="changePage('home')">MCOW</a>
-                <div class="container">
+                <a class="navbar-brand"  onclick="changePage('home')">MCOW</a>
+                <div id="navbar" class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                             aria-expanded="false" aria-controls="navbar">
@@ -27,39 +27,38 @@
                         </button>
 
                     </div>
-                    <div id="navbar" class="navbar-collapse collapse">
+                    <div  class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#" class="" onclick="changePage('home')">Home</a></li>
-
-                            <li><a href="#" onclick="changePage('addCow')">Thêm mới</a></li>
-                            <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button"
+                            <li><a  class="" onclick="changePage('home')">Home</a></li>
+                            <li><a onclick="changePage('addCow')">Thêm bò mới</a></li>
+                            <li class=" dropdown"><a  class="dropdown-toggle " data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Cập nhật <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" onclick="changePage('cowHealth')">Thêm các thông số</a></li>
-                                    <li><a href="#" onclick="changePage('food')">Bản ghi thức ăn</a></li>
-                                    <li><a href="#" onclick="changePage('vaccine')">Bản ghi tiêm phòng</a></li>
-                                    <li><a href="#" onclick="changePage('cowSick')">Bản ghi bệnh</a></li>
+                                    <li><a  onclick="changePage('cowHealth')">Bản ghi theo dõi sinh trưởng</a></li>
+                                    <li><a  onclick="changePage('food')">Bản ghi theo dõi chế dộ dinh dưỡng</a></li>
+                                    <li><a  onclick="changePage('vaccine')">Bản ghi sử dụng thuốc thú y</a></li>
+                                    <li><a  onclick="changePage('cowSick')">Bản ghi lịch sử bệnh</a></li>
                                 </ul>
                             </li>
-                            <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown"
+                            <li class=" dropdown"><a  class="dropdown-toggle active" data-toggle="dropdown"
                                     role="button" aria-haspopup="true" aria-expanded="false">Khác<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" onclick="changePage('sellCow')">Xuất chuồng</a></li>
-                                    <li><a href="#" onclick="changePage('die')">Bị chết</a></li>
+                                    <li><a  onclick="changePage('sellCow')">Xuất chuồng</a></li>
+                                    <li><a  onclick="changePage('die')">Bị chết</a></li>
 
                                 </ul>
                             </li>
 
                         </ul>
                         <ul class="nav navbar-nav pull-right" style="float:right">
-                            <li class=" dropdown"><a href="#" id="user" class="dropdown-toggle active" data-toggle="dropdown"
+                            <li class=" dropdown"><a  id="user" class="dropdown-toggle active" data-toggle="dropdown"
                                     role="button" aria-haspopup="true" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Thay đổi mật khẩu</a></li>
-                                    <li><a href="#">Thông tin tài khoản</a></li>
+                                    <li><a >Thay đổi mật khẩu</a></li>
+                                    <li><a >Thông tin tài khoản</a></li>
                                 </ul>
                             </li>
-                            <li class=""><a id="logout" href="#">Đăng nhập</a></li>
+                            <li class=""><a id="logout" >Đăng nhập</a></li>
                         </ul>
                     </div>
 
@@ -69,13 +68,6 @@
         </div>
     </div>
     <div id="router" class="row" style="padding-left:17px; padding-top: 0px">
-
-    </div>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     <div id="mainbody">
         <div style="text-align: center; opacity: 0.8;padding-top: 100px;">
@@ -87,29 +79,29 @@
             <div class="selectorclass" style="float:left">
                 <h2>Thêm bò</h2>
                 <h4>Thêm một con bò mới vào hệ thống</h4>
-                <a href="#" onclick="changePage('addCow')" class="a-selector">Thêm mới</a>
+                <a  onclick="changePage('addCow')" class="a-selector">Thêm mới</a>
             </div>
             <div style="width:9.5%; float:left">
                 <p></p>
             </div>
             <div class="selectorclass" style="float:left">
-                <h2>Cân nặng</h2>
-                <h4>Cập nhật thông số con bò theo định kì</h4>
-                <a href="#" onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
+                <h2>Sinh trưởng</h2>
+                <h4>Cập nhật thông số chiều cao, cân nặng cho con bò theo định kì</h4>
+                <a  onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
             </div>
             <div style="width:9.5%; float:left">
                 <p></p>
             </div>
             <div class="selectorclass" style="float:left">
-                <h2>Tiêm phòng</h2>
-                <h4>Cập nhật tình trạng tiêm phòng sức khỏe</h4>
-                <a href="#" onclick="changePage('vaccine')" class="a-selector">Cập nhật</a>
+                <h2>Sử dụng thuốc thú y</h2>
+                <h4>Cập nhật lịch sử sử dụng thuốc thú y cho bò</h4>
+                <a  onclick="changePage('vaccine')" class="a-selector">Cập nhật</a>
             </div>
 
             <div class="selectorclass" style="float:left; margin-top: 50px;">
                 <h2>Thức ăn</h2>
                 <h4>Cập nhật thức ăn của bò theo từng giai đoạn</h4>
-                <a href="#" onclick="changePage('food')" class="a-selector">Cập nhật</a>
+                <a  onclick="changePage('food')" class="a-selector">Cập nhật</a>
             </div>
             <div style="width:9.5%; float:left">
                 <p></p>
@@ -117,7 +109,7 @@
             <div class="selectorclass" style="float:left; margin-top: 50px;">
                 <h2>Hồ sơ bệnh</h2>
                 <h4>Lịch sử mắc bệnh và quá trình điều trị cho bò</h4>
-                <a href="#" onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
+                <a  onclick="changePage('cowHealth')" class="a-selector">Cập nhật</a>
             </div>
 
             <div style="width:9.5%; float:left">
@@ -126,38 +118,38 @@
             <div class="selectorclass" style="float:left; margin-top: 50px;">
                 <h2>Xuất chuồng</h2>
                 <h4>Con bò khi xuất chuồng sẽ được ghi lại</h4>
-                <a href="#" onclick="changePage('sellCow')" class="a-selector">Xuất chuồng</a>
+                <a  onclick="changePage('sellCow')" class="a-selector">Xuất chuồng</a>
             </div>
 
         </div>
         <br>
         <br>
     </div>
-            <div id="login">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="container" style="background-color:#93A6B4;opacity: 0.9; border-radius:5px; width:30%">
-                    <h2 style="text-align: center">Login</h2>
-                    <br>
-                    <form>
-                        <div style="opacity:1" class="form-group">
-                            <label>Tên đăng nhập</label>
-                            <input id="username" type="Username" class="form-control" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label>Mật khẩu</label>
-                            <input id="password" type="password" class="form-control" placeholder="Password">
-                        </div>
-                    </form>
-                    <button id="login_btn" class="btn btn-success" style="margin-left:38%">Đăng nhập</button>
-                    <br>
-                    <br>
-                    <br>
+    <div id="login">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container" style="background-color:#93A6B4;opacity: 0.9; border-radius:5px; width:30%">
+            <h2 style="text-align: center">Login</h2>
+            <br>
+            <form>
+                <div style="opacity:1" class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input id="username" type="Username" class="form-control" placeholder="Enter email">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input id="password" type="password" class="form-control" placeholder="Password">
+                </div>
+            </form>
+            <button id="login_btn" class="btn btn-success" style="margin-left:38%">Đăng nhập</button>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
 
 </body>
 

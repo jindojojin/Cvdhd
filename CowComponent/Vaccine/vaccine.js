@@ -109,6 +109,7 @@ function pushDataToSerVer() {
 returnEvent.watch(function (error, result) {
     if (result) {
         $("#loader").hide();
+        $("#spiner").hide();
         // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
         console.log(result.args);
         $("#closeChainModal").click();

@@ -227,11 +227,9 @@ function makeGenderSuggestion() {
 // Biến import từ CowStruct để theo dõi kết quả đẩy lên blockchain
 returnEvent.watch(function (error, result) {
     if (result) {
+        $("#spiner").hide();
         $("#loader").hide();
-        console.log(result);
         // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
-        message="";
-        
         console.log(result.args);
         $("#closeChainModal").click();
     } else {

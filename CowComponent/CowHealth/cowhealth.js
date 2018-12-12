@@ -104,6 +104,7 @@ function pushDataToSerVer() {
 // Biến import từ CowStruct để theo dõi kết quả đẩy lên blockchain
 returnEvent.watch(function (error, result) {
     if (result) {
+        $("#spiner").hide();
         $("#loader").hide();
         // $("#instructor").html(result.args.cowID + ' ' + result.args.data);
         console.log(result.args);
